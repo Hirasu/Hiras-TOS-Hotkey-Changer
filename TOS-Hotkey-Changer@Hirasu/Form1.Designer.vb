@@ -187,6 +187,7 @@ Partial Class Form1
         'RichTextBox1
         '
         Me.RichTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.RichTextBox1.Cursor = System.Windows.Forms.Cursors.Default
         Me.RichTextBox1.Location = New System.Drawing.Point(12, 17)
         Me.RichTextBox1.Name = "RichTextBox1"
         Me.RichTextBox1.ReadOnly = True
@@ -207,6 +208,7 @@ Partial Class Form1
         '
         Me.changinginfo.BackColor = System.Drawing.SystemColors.Control
         Me.changinginfo.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.changinginfo.Cursor = System.Windows.Forms.Cursors.Default
         Me.changinginfo.Location = New System.Drawing.Point(27, 17)
         Me.changinginfo.Name = "changinginfo"
         Me.changinginfo.Size = New System.Drawing.Size(114, 17)
@@ -281,6 +283,7 @@ Partial Class Form1
         '
         Me.RichTextBox2.BackColor = System.Drawing.SystemColors.Control
         Me.RichTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.RichTextBox2.Cursor = System.Windows.Forms.Cursors.Default
         Me.RichTextBox2.Location = New System.Drawing.Point(12, 13)
         Me.RichTextBox2.Name = "RichTextBox2"
         Me.RichTextBox2.ReadOnly = True
