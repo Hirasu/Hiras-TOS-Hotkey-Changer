@@ -62,10 +62,10 @@ Public Class Form1
         list_key.Rows(100).Visible = False
         list_key.Rows(99).Visible = False
         list_key.Rows(98).Visible = False
-        list_key.Rows(83).Visible = False
-        list_key.Rows(82).Visible = False
-        list_key.Rows(81).Visible = False
-        list_key.Rows(80).Visible = False
+        'list_key.Rows(83).Visible = False
+        'list_key.Rows(82).Visible = False
+        'list_key.Rows(81).Visible = False
+        'list_key.Rows(80).Visible = False
         'list_key.Rows(59).Visible = False
         list_key.Rows(29).Visible = False
         list_key.Rows(19).Visible = False
@@ -152,7 +152,7 @@ Public Class Form1
     End Function
 
     Private Sub Form1_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles change_to.KeyDown
-        'MessageBox.Show(e.KeyCode)
+        MessageBox.Show(e.KeyCode)
         If _change = "1" Then
             If e.KeyCode = Keys.F1 Then
                 conflict_check("F1")
@@ -249,10 +249,10 @@ Public Class Form1
         End Select
     End Sub
 
-    'Private Sub StwagList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles list_key.CellClick
-    '    MessageBox.Show(list_key.CurrentRow.Index)
+    Private Sub StwagList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles list_mouse.CellClick
+        MessageBox.Show(list_mouse.CurrentRow.Index)
 
-    ' End Sub
+    End Sub
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles change_to.Click
@@ -267,8 +267,8 @@ Public Class Form1
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles b_reload_k.Click
         If can_load = "0" Then
-            
-            
+
+
             key_text.Visible = False
             can_load = "1"
             load_delay.Enabled = True
@@ -294,7 +294,7 @@ Public Class Form1
 
     Private Sub Button7_Click_1(sender As Object, e As EventArgs) Handles b_reload_mouse.Click
         If can_load = "0" Then
-            
+
             mouse_text.Visible = False
             can_load = "1"
             load_delay.Enabled = True
@@ -416,5 +416,21 @@ Public Class Form1
     Private Sub load_delay_Tick(sender As Object, e As EventArgs) Handles load_delay.Tick
         can_load = "0"
         load_delay.Enabled = False
+    End Sub
+
+    Private Sub b_reset_arrow_Click(sender As Object, e As EventArgs) Handles b_reset_arrow.Click
+        If mode = "0" Then
+
+
+            _list.Rows(83).Cells(4).Value = "RIGHT"
+            _list.Rows(82).Cells(4).Value = "LEFT"
+            _list.Rows(81).Cells(4).Value = "DOWN"
+            _list.Rows(80).Cells(4).Value = "UP"
+        Else
+            _list.Rows(82).Cells(4).Value = "RIGHT"
+            _list.Rows(81).Cells(4).Value = "LEFT"
+            _list.Rows(80).Cells(4).Value = "DOWN"
+            _list.Rows(79).Cells(4).Value = "UP"
+        End If
     End Sub
 End Class

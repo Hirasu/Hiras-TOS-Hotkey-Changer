@@ -32,6 +32,7 @@ Partial Class Form1
         Me.change_enter = New System.Windows.Forms.Button()
         Me.b_reload_k = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.b_reset_arrow = New System.Windows.Forms.Button()
         Me.b_clear = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.b_reload_mouse = New System.Windows.Forms.Button()
@@ -75,7 +76,7 @@ Partial Class Form1
         Me.list_key.Name = "list_key"
         Me.list_key.RowHeadersWidth = 33
         Me.list_key.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.list_key.Size = New System.Drawing.Size(252, 363)
+        Me.list_key.Size = New System.Drawing.Size(252, 403)
         Me.list_key.TabIndex = 1
         '
         'b_save
@@ -138,20 +139,30 @@ Partial Class Form1
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.b_reset_arrow)
         Me.GroupBox1.Controls.Add(Me.b_clear)
         Me.GroupBox1.Controls.Add(Me.change_to)
         Me.GroupBox1.Controls.Add(Me.change_tab)
         Me.GroupBox1.Controls.Add(Me.change_enter)
-        Me.GroupBox1.Location = New System.Drawing.Point(288, 276)
+        Me.GroupBox1.Location = New System.Drawing.Point(288, 277)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(143, 132)
+        Me.GroupBox1.Size = New System.Drawing.Size(143, 168)
         Me.GroupBox1.TabIndex = 10
         Me.GroupBox1.TabStop = False
+        '
+        'b_reset_arrow
+        '
+        Me.b_reset_arrow.Location = New System.Drawing.Point(21, 102)
+        Me.b_reset_arrow.Name = "b_reset_arrow"
+        Me.b_reset_arrow.Size = New System.Drawing.Size(106, 23)
+        Me.b_reset_arrow.TabIndex = 10
+        Me.b_reset_arrow.Text = "Reset Arrow Keys"
+        Me.b_reset_arrow.UseVisualStyleBackColor = True
         '
         'b_clear
         '
         Me.b_clear.Enabled = False
-        Me.b_clear.Location = New System.Drawing.Point(34, 102)
+        Me.b_clear.Location = New System.Drawing.Point(34, 131)
         Me.b_clear.Name = "b_clear"
         Me.b_clear.Size = New System.Drawing.Size(83, 23)
         Me.b_clear.TabIndex = 9
@@ -164,7 +175,7 @@ Partial Class Form1
         Me.GroupBox2.Controls.Add(Me.b_exit)
         Me.GroupBox2.Controls.Add(Me.b_save)
         Me.GroupBox2.Controls.Add(Me.b_reload_k)
-        Me.GroupBox2.Location = New System.Drawing.Point(287, 414)
+        Me.GroupBox2.Location = New System.Drawing.Point(287, 450)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(143, 131)
         Me.GroupBox2.TabIndex = 11
@@ -203,7 +214,7 @@ Partial Class Form1
         'GroupBox4
         '
         Me.GroupBox4.Controls.Add(Me.changinginfo)
-        Me.GroupBox4.Location = New System.Drawing.Point(287, 233)
+        Me.GroupBox4.Location = New System.Drawing.Point(287, 231)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(147, 43)
         Me.GroupBox4.TabIndex = 13
@@ -313,7 +324,7 @@ Partial Class Form1
         Me.Mode_tab.Location = New System.Drawing.Point(13, 156)
         Me.Mode_tab.Name = "Mode_tab"
         Me.Mode_tab.SelectedIndex = 0
-        Me.Mode_tab.Size = New System.Drawing.Size(260, 389)
+        Me.Mode_tab.Size = New System.Drawing.Size(260, 429)
         Me.Mode_tab.TabIndex = 18
         '
         'TabPage1
@@ -323,7 +334,7 @@ Partial Class Form1
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(252, 363)
+        Me.TabPage1.Size = New System.Drawing.Size(252, 403)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Keyboard Mode"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -346,7 +357,7 @@ Partial Class Form1
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(252, 363)
+        Me.TabPage2.Size = New System.Drawing.Size(252, 403)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Mouse Mode"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -369,18 +380,18 @@ Partial Class Form1
         Me.list_mouse.Name = "list_mouse"
         Me.list_mouse.RowHeadersWidth = 33
         Me.list_mouse.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.list_mouse.Size = New System.Drawing.Size(252, 363)
+        Me.list_mouse.Size = New System.Drawing.Size(252, 403)
         Me.list_mouse.TabIndex = 2
         '
         'load_delay
         '
-        Me.load_delay.Interval = 1000
+        Me.load_delay.Interval = 1500
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(443, 557)
+        Me.ClientSize = New System.Drawing.Size(443, 597)
         Me.Controls.Add(Me.Mode_tab)
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.GroupBox5)
@@ -392,7 +403,7 @@ Partial Class Form1
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Hira's Tree of Savior Hotkey Changer v0.3@Hirasu"
+        Me.Text = "Hira's Tree of Savior Hotkey Changer v0.3.1@Hirasu"
         CType(Me.list_key, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
@@ -439,5 +450,6 @@ Partial Class Form1
     Friend WithEvents mouse_text As System.Windows.Forms.RichTextBox
     Friend WithEvents key_text As System.Windows.Forms.RichTextBox
     Friend WithEvents load_delay As System.Windows.Forms.Timer
+    Friend WithEvents b_reset_arrow As System.Windows.Forms.Button
 
 End Class
