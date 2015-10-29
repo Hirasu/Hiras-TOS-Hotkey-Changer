@@ -32,5 +32,16 @@ EXAMPLE FOR MOUSE MODE:
 -Now you can open your Map with "Tab" and attack with "E"
 
 -
+-
+"Hold to use" Example:
+-
+-Click on "Inventory"
 
+-Check the "Hold ALT" box
+
+-Click on the "change to..." button and press "E"
+
+-Save it!
+
+-Now you open your Inventory like in Classic Ragnarok Alt+E
 
