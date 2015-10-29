@@ -25,5 +25,6 @@ EXAMPLE FOR MOUSE MODE:
 Fix:
 -
 NUMPAD5 fixed
+
 "Clear" Button added
 
