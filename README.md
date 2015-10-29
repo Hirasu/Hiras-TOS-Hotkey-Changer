@@ -7,6 +7,12 @@ Rename the "Name" column items
 
 Joystick Support coming soon!
 
+Fix:
+-
+NUMPAD5 fixed
+
+"Clear" Button added
+
 -
 EXAMPLE FOR MOUSE MODE:
 -
@@ -24,13 +30,6 @@ EXAMPLE FOR MOUSE MODE:
 
 -Now you can open your Map with "Tab" and attack with "E"
 
+-
 
--
--
--
-Fix:
--
-NUMPAD5 fixed
-
-"Clear" Button added
 
