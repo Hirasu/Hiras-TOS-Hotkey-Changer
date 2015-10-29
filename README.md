@@ -4,6 +4,7 @@ Hotkey changer for Tree of Savior @ Hirasu
 Do to list:
 -
 Rename the "Name" column items
+
 Joystick Support coming soon!
 
 -
