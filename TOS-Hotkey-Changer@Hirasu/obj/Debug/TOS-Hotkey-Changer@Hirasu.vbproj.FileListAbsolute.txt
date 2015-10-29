@@ -1,0 +1,9 @@
+c:\users\hirasu\documents\visual studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\bin\Debug\TOS-Hotkey-Changer@Hirasu.exe
+c:\users\hirasu\documents\visual studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\bin\Debug\TOS-Hotkey-Changer@Hirasu.pdb
+c:\users\hirasu\documents\visual studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\bin\Debug\TOS-Hotkey-Changer@Hirasu.xml
+c:\users\hirasu\documents\visual studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\obj\Debug\TOS_Hotkey_Changer_Hirasu.Form1.resources
+c:\users\hirasu\documents\visual studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\obj\Debug\TOS_Hotkey_Changer_Hirasu.Resources.resources
+c:\users\hirasu\documents\visual studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\obj\Debug\TOS-Hotkey-Changer@Hirasu.vbproj.GenerateResource.Cache
+c:\users\hirasu\documents\visual studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\obj\Debug\TOS-Hotkey-Changer@Hirasu.exe
+c:\users\hirasu\documents\visual studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\obj\Debug\TOS-Hotkey-Changer@Hirasu.xml
+c:\users\hirasu\documents\visual studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\obj\Debug\TOS-Hotkey-Changer@Hirasu.pdb
