@@ -131,7 +131,7 @@ Public Class Form1
                     End Select
                 End If
             Next
-            If CheckSHIFT.CheckState = True Then
+            If CheckSHIFT.Checked = True Then
                 _list.Rows(_list.CurrentRow.Index).Cells(5).Value = "YES"
             Else
                 _list.Rows(_list.CurrentRow.Index).Cells(5).Value = "NO"
@@ -141,16 +141,14 @@ Public Class Form1
             Else
                 _list.Rows(_list.CurrentRow.Index).Cells(6).Value = "NO"
             End If
-            If CheckCTRL.CheckState = True Then
+            If CheckCTRL.Checked = True Then
                 _list.Rows(_list.CurrentRow.Index).Cells(7).Value = "YES"
             Else
                 _list.Rows(_list.CurrentRow.Index).Cells(7).Value = "NO"
             End If
             _list.Rows(_list.CurrentRow.Index).Cells(4).Value = _key
         End If
-        CheckALT.CheckState = False
-        CheckSHIFT.CheckState = False
-        CheckCTRL.CheckState = False
+ 
     End Function
 
     Private Sub Form1_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles change_to.KeyDown

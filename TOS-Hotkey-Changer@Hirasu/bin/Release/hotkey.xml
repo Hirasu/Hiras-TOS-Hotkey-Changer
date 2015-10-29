@@ -2,7 +2,7 @@
 <Category>
   <HotKey ID="Chat" Name="채팅" DownScp="ui.ProcessReturnKey()" UpScp="None" Key="ENTER" UseShift="NO" UseAlt="NO" UseCtrl="NO" OnEdit="YES" />
   <HotKey ID="ChatPad" Name="채팅(패드)" DownScp="ui.ProcessReturnKey()" UpScp="None" Key="PADENTER" UseShift="NO" UseAlt="NO" UseCtrl="NO" OnEdit="YES" />
-  <HotKey ID="Status" Name="캐릭터" DownScp="UI_TOGGLE_STATUS()" UpScp="None" Key="F1" UseShift="NO" UseAlt="NO" UseCtrl="NO" OnEdit="NO" />
+  <HotKey ID="Status" Name="캐릭터" DownScp="UI_TOGGLE_STATUS()" UpScp="None" Key="F2" UseShift="NO" UseAlt="YES" UseCtrl="NO" OnEdit="NO" />
   <HotKey ID="Charinfo" Name="캐릭터정보" DownScp="CHARBASEINFO_EXCHANGE()" UpScp="None" Key="F1" UseShift="NO" UseAlt="NO" UseCtrl="NO" OnEdit="NO" />
   <HotKey ID="Inventory" Name="인벤토리" DownScp="UI_TOGGLE_INVENTORY()" UpScp="None" Key="F2" UseShift="NO" UseAlt="NO" UseCtrl="NO" OnEdit="NO" />
   <HotKey ID="SkillTree" Name="스킬트리" DownScp="UI_TOGGLE_SKILLTREE()" UpScp="None" Key="F3" UseShift="NO" UseAlt="NO" UseCtrl="NO" OnEdit="NO " />
