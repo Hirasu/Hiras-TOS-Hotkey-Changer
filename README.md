@@ -33,7 +33,7 @@ EXAMPLE FOR MOUSE MODE:
 
 
 -
-"Hold to use" Example:
+"Hold to use" EXAMPLE:
 -
 -Click on "Inventory"
 
