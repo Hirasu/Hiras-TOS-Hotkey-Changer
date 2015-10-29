@@ -9,13 +9,13 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("TOS-Hotkey-Changer@Hirasu")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("Microsoft")> 
+<Assembly: AssemblyDescription("@Hirasu")> 
+<Assembly: AssemblyCompany("Hirasu")> 
 <Assembly: AssemblyProduct("TOS-Hotkey-Changer@Hirasu")> 
-<Assembly: AssemblyCopyright("Copyright © Microsoft 2015")> 
+<Assembly: AssemblyCopyright("Hirasu")> 
 <Assembly: AssemblyTrademark("")> 
 
-<Assembly: ComVisible(False)>
+<Assembly: ComVisible(False)> 
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
 <Assembly: Guid("9d852a95-7309-42d3-9159-84a46e32cef2")> 

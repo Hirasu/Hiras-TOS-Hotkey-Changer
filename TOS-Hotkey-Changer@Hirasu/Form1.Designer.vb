@@ -22,8 +22,9 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Me.list = New System.Windows.Forms.DataGridView()
+        Me.list_key = New System.Windows.Forms.DataGridView()
         Me.b_save = New System.Windows.Forms.Button()
         Me.change_to = New System.Windows.Forms.Button()
         Me.b_exit = New System.Windows.Forms.Button()
@@ -31,6 +32,7 @@ Partial Class Form1
         Me.change_enter = New System.Windows.Forms.Button()
         Me.b_reload_k = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.b_clear = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.b_reload_mouse = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
@@ -45,8 +47,14 @@ Partial Class Form1
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
         Me.chat_fix = New System.Windows.Forms.Button()
-        Me.b_clear = New System.Windows.Forms.Button()
-        CType(Me.list, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Mode_tab = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.key_text = New System.Windows.Forms.RichTextBox()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.mouse_text = New System.Windows.Forms.RichTextBox()
+        Me.list_mouse = New System.Windows.Forms.DataGridView()
+        Me.load_delay = New System.Windows.Forms.Timer(Me.components)
+        CType(Me.list_key, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -54,15 +62,21 @@ Partial Class Form1
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
+        Me.Mode_tab.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        CType(Me.list_mouse, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'list
+        'list_key
         '
-        Me.list.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.list.Location = New System.Drawing.Point(13, 155)
-        Me.list.Name = "list"
-        Me.list.Size = New System.Drawing.Size(260, 390)
-        Me.list.TabIndex = 1
+        Me.list_key.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.list_key.Location = New System.Drawing.Point(0, 0)
+        Me.list_key.Name = "list_key"
+        Me.list_key.RowHeadersWidth = 33
+        Me.list_key.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.list_key.Size = New System.Drawing.Size(252, 363)
+        Me.list_key.TabIndex = 1
         '
         'b_save
         '
@@ -129,6 +143,15 @@ Partial Class Form1
         Me.GroupBox1.Size = New System.Drawing.Size(143, 132)
         Me.GroupBox1.TabIndex = 10
         Me.GroupBox1.TabStop = False
+        '
+        'b_clear
+        '
+        Me.b_clear.Location = New System.Drawing.Point(34, 102)
+        Me.b_clear.Name = "b_clear"
+        Me.b_clear.Size = New System.Drawing.Size(83, 23)
+        Me.b_clear.TabIndex = 9
+        Me.b_clear.Text = "Clear"
+        Me.b_clear.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
@@ -274,20 +297,82 @@ Partial Class Form1
         Me.chat_fix.Text = "Fix Chat Type"
         Me.chat_fix.UseVisualStyleBackColor = True
         '
-        'b_clear
+        'Mode_tab
         '
-        Me.b_clear.Location = New System.Drawing.Point(34, 102)
-        Me.b_clear.Name = "b_clear"
-        Me.b_clear.Size = New System.Drawing.Size(83, 23)
-        Me.b_clear.TabIndex = 9
-        Me.b_clear.Text = "Clear"
-        Me.b_clear.UseVisualStyleBackColor = True
+        Me.Mode_tab.Controls.Add(Me.TabPage1)
+        Me.Mode_tab.Controls.Add(Me.TabPage2)
+        Me.Mode_tab.Location = New System.Drawing.Point(13, 156)
+        Me.Mode_tab.Name = "Mode_tab"
+        Me.Mode_tab.SelectedIndex = 0
+        Me.Mode_tab.Size = New System.Drawing.Size(260, 389)
+        Me.Mode_tab.TabIndex = 18
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.key_text)
+        Me.TabPage1.Controls.Add(Me.list_key)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(252, 363)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "Keyboard Mode"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'key_text
+        '
+        Me.key_text.BackColor = System.Drawing.SystemColors.AppWorkspace
+        Me.key_text.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.key_text.Cursor = System.Windows.Forms.Cursors.Default
+        Me.key_text.Location = New System.Drawing.Point(19, 313)
+        Me.key_text.Name = "key_text"
+        Me.key_text.Size = New System.Drawing.Size(227, 19)
+        Me.key_text.TabIndex = 4
+        Me.key_text.Text = "Click on the ""Reload Keyboard Mode"" button"
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.mouse_text)
+        Me.TabPage2.Controls.Add(Me.list_mouse)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(252, 363)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Mouse Mode"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'mouse_text
+        '
+        Me.mouse_text.BackColor = System.Drawing.SystemColors.AppWorkspace
+        Me.mouse_text.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.mouse_text.Cursor = System.Windows.Forms.Cursors.Default
+        Me.mouse_text.Location = New System.Drawing.Point(19, 313)
+        Me.mouse_text.Name = "mouse_text"
+        Me.mouse_text.Size = New System.Drawing.Size(208, 15)
+        Me.mouse_text.TabIndex = 3
+        Me.mouse_text.Text = "Click on the ""Reload Mouse Mode"" button"
+        '
+        'list_mouse
+        '
+        Me.list_mouse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.list_mouse.Location = New System.Drawing.Point(0, 0)
+        Me.list_mouse.Name = "list_mouse"
+        Me.list_mouse.RowHeadersWidth = 33
+        Me.list_mouse.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.list_mouse.Size = New System.Drawing.Size(252, 363)
+        Me.list_mouse.TabIndex = 2
+        '
+        'load_delay
+        '
+        Me.load_delay.Interval = 1000
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(443, 557)
+        Me.Controls.Add(Me.Mode_tab)
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.PictureBox1)
@@ -295,12 +380,11 @@ Partial Class Form1
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.list)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Hira's Tree of Savior Hotkey Changer v0.2@Hirasu"
-        CType(Me.list, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Text = "Hira's Tree of Savior Hotkey Changer v0.3@Hirasu"
+        CType(Me.list_key, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
@@ -309,10 +393,14 @@ Partial Class Form1
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
+        Me.Mode_tab.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage2.ResumeLayout(False)
+        CType(Me.list_mouse, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents list As System.Windows.Forms.DataGridView
+    Friend WithEvents list_key As System.Windows.Forms.DataGridView
     Friend WithEvents b_save As System.Windows.Forms.Button
     Friend WithEvents change_to As System.Windows.Forms.Button
     Friend WithEvents b_exit As System.Windows.Forms.Button
@@ -335,5 +423,12 @@ Partial Class Form1
     Friend WithEvents chat_fix As System.Windows.Forms.Button
     Friend WithEvents b_reload_mouse As System.Windows.Forms.Button
     Friend WithEvents b_clear As System.Windows.Forms.Button
+    Friend WithEvents Mode_tab As System.Windows.Forms.TabControl
+    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
+    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
+    Friend WithEvents list_mouse As System.Windows.Forms.DataGridView
+    Friend WithEvents mouse_text As System.Windows.Forms.RichTextBox
+    Friend WithEvents key_text As System.Windows.Forms.RichTextBox
+    Friend WithEvents load_delay As System.Windows.Forms.Timer
 
 End Class

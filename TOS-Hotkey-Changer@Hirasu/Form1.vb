@@ -8,53 +8,72 @@ Public Class Form1
     Private _Datafile2 As New FileInfo(Application.StartupPath & "\hotkey_mousemode.xml")
     Public mode As Integer
     Private _change As New Integer
+    Public _list As DataGridView
+    Private can_load As Integer = "0"
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim curFile As String = _Datafile.FullName
-
-        If File.Exists(curFile) Then
-            Loading()
-            mode = "0"
+    End Sub
+    Public Sub check_mode()
+        If mode = "0" Then
+            _list = list_key
         Else
-            MessageBox.Show("Can't find 'hotkey.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
-            Me.Close()
+            _list = list_mouse
+        End If
+    End Sub
+    Private Sub check_hold_keys()
+
+        If _list.Rows(_list.CurrentRow.Index).Cells(5).Value = "YES" Then
+            CheckSHIFT.CheckState = 1
+        Else
+            CheckSHIFT.CheckState = False
+        End If
+
+        If _list.Rows(_list.CurrentRow.Index).Cells(6).Value = "YES" Then
+            CheckALT.CheckState = 1
+        Else
+            CheckALT.CheckState = False
+        End If
+
+        If _list.Rows(_list.CurrentRow.Index).Cells(7).Value = "YES" Then
+            CheckCTRL.CheckState = 1
+        Else
+            CheckCTRL.CheckState = False
         End If
     End Sub
     Private Sub Loading()
-
         Dim xmlFile As XmlReader
         xmlFile = XmlReader.Create("hotkey.xml", New XmlReaderSettings())
         Dim ds As New DataSet
         ds.ReadXml(xmlFile)
 
-        list.DataSource = ds.Tables(0)
-        list.Columns("ID").ReadOnly = True
-        list.Columns("ID").HeaderText = "Name"
-        list.Columns("KEY").ReadOnly = True
-        list.Columns("KEY").HeaderText = "Hotkey"
-        list.Columns(1).Visible = False
-        list.Columns(2).Visible = False
-        list.Columns(3).Visible = False
-        list.Columns(5).Visible = False
-        list.Columns(6).Visible = False
-        list.Columns(7).Visible = False
-        list.Columns(8).Visible = False
-        list.Rows(103).Visible = False
-        list.Rows(101).Visible = False
-        list.Rows(100).Visible = False
-        list.Rows(99).Visible = False
-        list.Rows(98).Visible = False
-        list.Rows(83).Visible = False
-        list.Rows(82).Visible = False
-        list.Rows(81).Visible = False
-        list.Rows(80).Visible = False
-        list.Rows(59).Visible = False
-        list.Rows(29).Visible = False
-        list.Rows(19).Visible = False
-        list.Rows(18).Visible = False
-        list.Rows(17).Visible = False
-        list.Rows(16).Visible = False
-        list.Rows(1).Visible = False
-        If list.Rows(105).Cells(4).Value = "" Then
+        list_key.DataSource = ds.Tables(0)
+        list_key.Columns("ID").ReadOnly = True
+        list_key.Columns("ID").HeaderText = "Name"
+        list_key.Columns("KEY").ReadOnly = True
+        list_key.Columns("KEY").HeaderText = "Hotkey"
+        list_key.Columns(1).Visible = False
+        list_key.Columns(2).Visible = False
+        list_key.Columns(3).Visible = False
+        list_key.Columns(5).Visible = False
+        list_key.Columns(6).Visible = False
+        list_key.Columns(7).Visible = False
+        list_key.Columns(8).Visible = False
+        list_key.Rows(103).Visible = False
+        list_key.Rows(101).Visible = False
+        list_key.Rows(100).Visible = False
+        list_key.Rows(99).Visible = False
+        list_key.Rows(98).Visible = False
+        list_key.Rows(83).Visible = False
+        list_key.Rows(82).Visible = False
+        list_key.Rows(81).Visible = False
+        list_key.Rows(80).Visible = False
+        list_key.Rows(59).Visible = False
+        list_key.Rows(29).Visible = False
+        list_key.Rows(19).Visible = False
+        list_key.Rows(18).Visible = False
+        list_key.Rows(17).Visible = False
+        list_key.Rows(16).Visible = False
+        list_key.Rows(1).Visible = False
+        If list_key.Rows(105).Cells(4).Value = "" Then
             chat_fix.Text = "Remove Fix"
         End If
 
@@ -64,73 +83,70 @@ Public Class Form1
     End Sub
 
     Private Sub Loading_mouse()
-
         Dim xmlFile As XmlReader
         xmlFile = XmlReader.Create("hotkey_mousemode.xml", New XmlReaderSettings())
-        Dim ds As New DataSet
-        ds.ReadXml(xmlFile)
-
-        list.DataSource = ds.Tables(0)
-        list.Columns("ID").ReadOnly = True
-        list.Columns("ID").HeaderText = "Name"
-        list.Columns("KEY").ReadOnly = True
-        list.Columns("KEY").HeaderText = "Hotkey"
-        list.Columns(1).Visible = False
-        list.Columns(2).Visible = False
-        list.Columns(3).Visible = False
-        list.Columns(5).Visible = False
-        list.Columns(6).Visible = False
-        list.Columns(7).Visible = False
-        list.Columns(8).Visible = False
-        list.Rows(19).Visible = False
-        list.Rows(97).Visible = False
-        list.Rows(95).Visible = False
-        list.Rows(94).Visible = False
-        list.Rows(93).Visible = False
-        list.Rows(19).Visible = False
-        list.Rows(18).Visible = False
-        list.Rows(17).Visible = False
-        list.Rows(16).Visible = False
-        list.Rows(1).Visible = False
-        If list.Rows(99).Cells(4).Value = "" Then
+        Dim ds_mouse As New DataSet
+        ds_mouse.ReadXml(xmlFile)
+        xmlFile.Close()
+        list_mouse.DataSource = ds_mouse.Tables(0)
+        list_mouse.Columns("ID").ReadOnly = True
+        list_mouse.Columns("ID").HeaderText = "Name"
+        list_mouse.Columns("KEY").ReadOnly = True
+        list_mouse.Columns("KEY").HeaderText = "Hotkey"
+        list_mouse.Columns(1).Visible = False
+        list_mouse.Columns(2).Visible = False
+        list_mouse.Columns(3).Visible = False
+        list_mouse.Columns(5).Visible = False
+        list_mouse.Columns(6).Visible = False
+        list_mouse.Columns(7).Visible = False
+        list_mouse.Columns(8).Visible = False
+        'list_mouse.Rows(19).Visible = False
+        list_mouse.Rows(97).Visible = False
+        list_mouse.Rows(95).Visible = False
+        list_mouse.Rows(94).Visible = False
+        list_mouse.Rows(93).Visible = False
+        list_mouse.Rows(19).Visible = False
+        list_mouse.Rows(18).Visible = False
+        list_mouse.Rows(17).Visible = False
+        list_mouse.Rows(16).Visible = False
+        list_mouse.Rows(1).Visible = False
+        If list_mouse.Rows(99).Cells(4).Value = "" Then
             chat_fix.Text = "Remove Fix"
         End If
 
-
-
-        xmlFile.Close()
     End Sub
 
     Public Function conflict_check(ByVal _key As String) As String
-        If list.Rows(list.CurrentRow.Index).Cells(4).Value = _key Then
+        check_mode()
+        If _list.Rows(_list.CurrentRow.Index).Cells(4).Value = _key Then
         Else
 
             Dim Max_Row As Integer
-            Max_Row = list.Rows.Count
+            Max_Row = _list.Rows.Count
             For i As Integer = 0 To Max_Row - 1 Step +1
-                If list.Rows(i).Cells(4).Value = _key Then
-                    Select Case MessageBox.Show(Me, "Conflict with '" & list.Rows(i).Cells(0).Value & "' , continue?", "CONFLICT!", MessageBoxButtons.YesNo)
+                If _list.Rows(i).Cells(4).Value = _key Then
+                    Select Case MessageBox.Show(Me, "Conflict with '" & _list.Rows(i).Cells(0).Value & "' , continue?", "CONFLICT!", MessageBoxButtons.YesNo)
                         Case DialogResult.No : Return False
                         Case DialogResult.Yes
                     End Select
                 End If
             Next
             If CheckSHIFT.CheckState = True Then
-                list.Rows(list.CurrentRow.Index).Cells(5).Value = "YES"
+                _list.Rows(_list.CurrentRow.Index).Cells(5).Value = "YES"
             Else
-                list.Rows(list.CurrentRow.Index).Cells(5).Value = "NO"
+                _list.Rows(_list.CurrentRow.Index).Cells(5).Value = "NO"
             End If
             If CheckALT.Checked = True Then
-                list.Rows(list.CurrentRow.Index).Cells(6).Value = "YES"
+                _list.Rows(_list.CurrentRow.Index).Cells(6).Value = "YES"
             Else
-                list.Rows(list.CurrentRow.Index).Cells(6).Value = "NO"
+                _list.Rows(_list.CurrentRow.Index).Cells(6).Value = "NO"
             End If
             If CheckCTRL.CheckState = True Then
-                list.Rows(list.CurrentRow.Index).Cells(7).Value = "YES"
+                _list.Rows(_list.CurrentRow.Index).Cells(7).Value = "YES"
             Else
-                list.Rows(list.CurrentRow.Index).Cells(7).Value = "NO"
+                _list.Rows(_list.CurrentRow.Index).Cells(7).Value = "NO"
             End If
-            list.Rows(list.CurrentRow.Index).Cells(4).Value = _key
+            _list.Rows(_list.CurrentRow.Index).Cells(4).Value = _key
         End If
         CheckALT.CheckState = False
         CheckSHIFT.CheckState = False
@@ -205,16 +221,17 @@ Public Class Form1
 
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles b_save.Click
+        check_mode()
         If mode = "0" Then
             Select Case MessageBox.Show(Me, "Are you sure?", "Saving", MessageBoxButtons.YesNo)
                 Case DialogResult.No : Return
-                Case DialogResult.Yes : list.DataSource.WriteXml(_Datafile.FullName)
+                Case DialogResult.Yes : list_key.DataSource.WriteXml(_Datafile.FullName)
                     MsgBox("Saved")           ' 
             End Select
         Else
             Select Case MessageBox.Show(Me, "Are you sure?", "Saving", MessageBoxButtons.YesNo)
                 Case DialogResult.No : Return
-                Case DialogResult.Yes : list.DataSource.WriteXml(_Datafile2.FullName)
+                Case DialogResult.Yes : list_mouse.DataSource.WriteXml(_Datafile2.FullName)
                     MsgBox("Saved")
             End Select
         End If
@@ -231,14 +248,15 @@ Public Class Form1
         End Select
     End Sub
 
-    ' Private Sub StwagList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles list.CellClick
-    '    MessageBox.Show(list.CurrentRow.Index)
+    ' Private Sub StwagList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles list_mouse.CellClick
+    ' MessageBox.Show(list_mouse.CurrentRow.Index)
 
-    'End Sub
+    ' End Sub
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles change_to.Click
-        If list.CurrentRow.Index = 0 Then
+        check_mode()
+        If _list.CurrentRow.Index = 0 Then
             changinginfo.Text = "Cant change Chat!"
         Else
             _change = "1"
@@ -247,18 +265,41 @@ Public Class Form1
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles b_reload_k.Click
-        Dim curFile As String = _Datafile.FullName
+        If can_load = "0" Then
+            key_text.Visible = False
+            can_load = "1"
+            load_delay.Enabled = True
+            Dim curFile As String = _Datafile.FullName
 
-        If File.Exists(curFile) Then
-            Loading()
-            mode = "0"
-        Else
-            MessageBox.Show("Can't find 'hotkey.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
-            Me.Close()
+            If File.Exists(curFile) Then
+                Loading()
+                mode = "0"
+            Else
+                MessageBox.Show("Can't find 'hotkey.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
+                Me.Close()
+            End If
+        End If
+    End Sub
+
+    Private Sub Button7_Click_1(sender As Object, e As EventArgs) Handles b_reload_mouse.Click
+        If can_load = "0" Then
+            mouse_text.Visible = False
+            can_load = "1"
+            load_delay.Enabled = True
+            Dim curFile_mouse As String = _Datafile2.FullName
+
+            If File.Exists(curFile_mouse) Then
+                Loading_mouse()
+
+            Else
+                MessageBox.Show("Can't find 'hotkey_mousemode.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
+                Me.Close()
+            End If
         End If
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles change_tab.Click
+
         conflict_check("TAB")
     End Sub
 
@@ -267,24 +308,25 @@ Public Class Form1
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles chat_fix.Click
+        check_mode()
         If mode = "0" Then
-            If list.Rows(105).Cells(4).Value = "TAB" Then
-                list.Rows(105).Cells(4).Value = ""
+            If _list.Rows(105).Cells(4).Value = "TAB" Then
+                _list.Rows(105).Cells(4).Value = ""
                 MessageBox.Show("Fixed!")
                 chat_fix.Text = "Remove Fix"
             Else
-                list.Rows(105).Cells(4).Value = "TAB"
+                _list.Rows(105).Cells(4).Value = "TAB"
                 MessageBox.Show("Removed!")
                 chat_fix.Text = "Fix Chat Type"
             End If
 
         Else
-            If list.Rows(99).Cells(4).Value = "TAB" Then
-                list.Rows(99).Cells(4).Value = ""
+            If _list.Rows(99).Cells(4).Value = "TAB" Then
+                _list.Rows(99).Cells(4).Value = ""
                 MessageBox.Show("Fixed!")
                 chat_fix.Text = "Remove Fix"
             Else
-                list.Rows(99).Cells(4).Value = "TAB"
+                _list.Rows(99).Cells(4).Value = "TAB"
                 MessageBox.Show("Removed!")
                 chat_fix.Text = "Fix Chat Type"
             End If
@@ -292,20 +334,35 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Button7_Click_1(sender As Object, e As EventArgs) Handles b_reload_mouse.Click
-        Dim curFile As String = _Datafile2.FullName
 
-        If File.Exists(curFile) Then
-            Loading_mouse()
-            mode = "1"
-        Else
-            MessageBox.Show("Can't find 'hotkey_mousemode.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
-            Me.Close()
-        End If
-
-    End Sub
 
     Private Sub b_clear_Click(sender As Object, e As EventArgs) Handles b_clear.Click
-        list.Rows(list.CurrentRow.Index).Cells(4).Value = ""
+        check_mode()
+        _list.Rows(_list.CurrentRow.Index).Cells(4).Value = ""
+    End Sub
+
+    Private Sub oncellclick(sender As Object, e As EventArgs) Handles list_key.CellClick
+        check_mode()
+        check_hold_keys()
+    End Sub
+    Private Sub oncellclick_mouse(sender As Object, e As EventArgs) Handles list_mouse.CellClick
+        check_hold_keys()
+    End Sub
+
+    Private Sub Page_key_Click(sender As Object, e As EventArgs) Handles TabPage1.Enter
+        mode = "0"
+        check_mode()
+    End Sub
+
+    Private Sub Page_mouse_Click(sender As Object, e As EventArgs) Handles TabPage2.Enter
+        mode = "1"
+        check_mode()
+
+    End Sub
+
+
+    Private Sub load_delay_Tick(sender As Object, e As EventArgs) Handles load_delay.Tick
+        can_load = "0"
+        load_delay.Enabled = False
     End Sub
 End Class
