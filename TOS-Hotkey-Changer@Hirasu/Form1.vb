@@ -203,9 +203,6 @@ Public Class Form1
     End Sub
 
 
-    'Private Sub Control_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles list.KeyPress
-    '   MessageBox.Show("You pressed:  " & e.KeyChar)
-    'End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles b_save.Click
         If mode = "0" Then
