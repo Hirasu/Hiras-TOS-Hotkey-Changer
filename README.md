@@ -31,7 +31,7 @@ EXAMPLE FOR MOUSE MODE:
 
 -Now you can open your Map with "Tab" and attack with "E"
 
--
+
 -
 "Hold to use" Example:
 -
