@@ -45,3 +45,15 @@ EXAMPLE FOR MOUSE MODE:
 
 -Now you open your Inventory like in Classic Ragnarok Alt+E
 
+-
+UDATE v0.3.1:
+-
+-New layout
+
+-Read "Hold to use" from xml
+
+-"Hold to use" save fix for Shift and Ctrl
+
+-QuickSlot10 re-added
+
+-Move Right/left/down/up hotkey added
