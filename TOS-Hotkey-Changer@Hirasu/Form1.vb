@@ -66,7 +66,7 @@ Public Class Form1
         list_key.Rows(82).Visible = False
         list_key.Rows(81).Visible = False
         list_key.Rows(80).Visible = False
-        list_key.Rows(59).Visible = False
+        'list_key.Rows(59).Visible = False
         list_key.Rows(29).Visible = False
         list_key.Rows(19).Visible = False
         list_key.Rows(18).Visible = False
@@ -152,6 +152,7 @@ Public Class Form1
     End Function
 
     Private Sub Form1_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles change_to.KeyDown
+        'MessageBox.Show(e.KeyCode)
         If _change = "1" Then
             If e.KeyCode = Keys.F1 Then
                 conflict_check("F1")
@@ -207,6 +208,8 @@ Public Class Form1
                 conflict_check("INSERT")
             ElseIf e.KeyCode = Keys.Space Then
                 conflict_check("SPACE")
+            ElseIf e.KeyCode = "188" Then
+                conflict_check(";")
             ElseIf e.KeyCode = Keys.Enter Then
             Else
                 conflict_check(Convert.ToChar(e.KeyCode))
@@ -246,8 +249,8 @@ Public Class Form1
         End Select
     End Sub
 
-    ' Private Sub StwagList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles list_mouse.CellClick
-    ' MessageBox.Show(list_mouse.CurrentRow.Index)
+    'Private Sub StwagList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles list_key.CellClick
+    '    MessageBox.Show(list_key.CurrentRow.Index)
 
     ' End Sub
 
@@ -264,6 +267,8 @@ Public Class Form1
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles b_reload_k.Click
         If can_load = "0" Then
+            
+            
             key_text.Visible = False
             can_load = "1"
             load_delay.Enabled = True
@@ -276,11 +281,20 @@ Public Class Form1
                 MessageBox.Show("Can't find 'hotkey.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
                 Me.Close()
             End If
+            If list_key.Rows.Count > 1 Then
+                change_to.Enabled = True
+                change_tab.Enabled = True
+                change_enter.Enabled = True
+                b_clear.Enabled = True
+                chat_fix.Enabled = True
+                b_save.Enabled = True
+            End If
         End If
     End Sub
 
     Private Sub Button7_Click_1(sender As Object, e As EventArgs) Handles b_reload_mouse.Click
         If can_load = "0" Then
+            
             mouse_text.Visible = False
             can_load = "1"
             load_delay.Enabled = True
@@ -292,6 +306,14 @@ Public Class Form1
             Else
                 MessageBox.Show("Can't find 'hotkey_mousemode.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
                 Me.Close()
+            End If
+            If list_mouse.Rows.Count > 1 Then
+                change_to.Enabled = True
+                change_tab.Enabled = True
+                change_enter.Enabled = True
+                b_clear.Enabled = True
+                chat_fix.Enabled = True
+                b_save.Enabled = True
             End If
         End If
     End Sub
@@ -350,11 +372,43 @@ Public Class Form1
     Private Sub Page_key_Click(sender As Object, e As EventArgs) Handles TabPage1.Enter
         mode = "0"
         check_mode()
+        If list_key.Rows.Count > 1 Then
+            change_to.Enabled = True
+            change_tab.Enabled = True
+            change_enter.Enabled = True
+            b_clear.Enabled = True
+            chat_fix.Enabled = True
+            b_save.Enabled = True
+        Else
+
+            change_to.Enabled = False
+            change_tab.Enabled = False
+            change_enter.Enabled = False
+            b_clear.Enabled = False
+            chat_fix.Enabled = False
+            b_save.Enabled = False
+        End If
     End Sub
 
     Private Sub Page_mouse_Click(sender As Object, e As EventArgs) Handles TabPage2.Enter
         mode = "1"
         check_mode()
+        If list_mouse.Rows.Count > 1 Then
+            change_to.Enabled = True
+            change_tab.Enabled = True
+            change_enter.Enabled = True
+            b_clear.Enabled = True
+            chat_fix.Enabled = True
+            b_save.Enabled = True
+        Else
+
+            change_to.Enabled = False
+            change_tab.Enabled = False
+            change_enter.Enabled = False
+            b_clear.Enabled = False
+            chat_fix.Enabled = False
+            b_save.Enabled = False
+        End If
 
     End Sub
 

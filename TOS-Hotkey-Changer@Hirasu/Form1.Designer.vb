@@ -80,6 +80,7 @@ Partial Class Form1
         '
         'b_save
         '
+        Me.b_save.Enabled = False
         Me.b_save.Location = New System.Drawing.Point(35, 15)
         Me.b_save.Name = "b_save"
         Me.b_save.Size = New System.Drawing.Size(74, 23)
@@ -89,6 +90,7 @@ Partial Class Form1
         '
         'change_to
         '
+        Me.change_to.Enabled = False
         Me.change_to.Location = New System.Drawing.Point(34, 15)
         Me.change_to.Name = "change_to"
         Me.change_to.Size = New System.Drawing.Size(83, 23)
@@ -107,6 +109,7 @@ Partial Class Form1
         '
         'change_tab
         '
+        Me.change_tab.Enabled = False
         Me.change_tab.Location = New System.Drawing.Point(21, 44)
         Me.change_tab.Name = "change_tab"
         Me.change_tab.Size = New System.Drawing.Size(106, 23)
@@ -116,6 +119,7 @@ Partial Class Form1
         '
         'change_enter
         '
+        Me.change_enter.Enabled = False
         Me.change_enter.Location = New System.Drawing.Point(21, 73)
         Me.change_enter.Name = "change_enter"
         Me.change_enter.Size = New System.Drawing.Size(106, 23)
@@ -146,6 +150,7 @@ Partial Class Form1
         '
         'b_clear
         '
+        Me.b_clear.Enabled = False
         Me.b_clear.Location = New System.Drawing.Point(34, 102)
         Me.b_clear.Name = "b_clear"
         Me.b_clear.Size = New System.Drawing.Size(83, 23)
@@ -293,6 +298,7 @@ Partial Class Form1
         '
         'chat_fix
         '
+        Me.chat_fix.Enabled = False
         Me.chat_fix.Location = New System.Drawing.Point(34, 44)
         Me.chat_fix.Name = "chat_fix"
         Me.chat_fix.Size = New System.Drawing.Size(83, 23)
