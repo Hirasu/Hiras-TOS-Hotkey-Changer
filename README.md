@@ -8,12 +8,6 @@ Rename the "Name" column items
 
 Joystick Support coming soon!
 
-Fix:
--
-NUMPAD5 fixed
-
-"Clear" Button added
-
 -
 EXAMPLE FOR MOUSE MODE:
 -
