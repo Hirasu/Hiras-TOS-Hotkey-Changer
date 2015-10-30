@@ -131,28 +131,15 @@ Public Class Form1
                     End Select
                 End If
             Next
-            If CheckSHIFT.Checked = True Then
-                _list.Rows(_list.CurrentRow.Index).Cells(5).Value = "YES"
-            Else
-                _list.Rows(_list.CurrentRow.Index).Cells(5).Value = "NO"
-            End If
-            If CheckALT.Checked = True Then
-                _list.Rows(_list.CurrentRow.Index).Cells(6).Value = "YES"
-            Else
-                _list.Rows(_list.CurrentRow.Index).Cells(6).Value = "NO"
-            End If
-            If CheckCTRL.Checked = True Then
-                _list.Rows(_list.CurrentRow.Index).Cells(7).Value = "YES"
-            Else
-                _list.Rows(_list.CurrentRow.Index).Cells(7).Value = "NO"
-            End If
+            
             _list.Rows(_list.CurrentRow.Index).Cells(4).Value = _key
         End If
+        
  
     End Function
 
     Private Sub Form1_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles change_to.KeyDown
-        MessageBox.Show(e.KeyCode)
+        'MessageBox.Show(e.KeyCode)
         If _change = "1" Then
             If e.KeyCode = Keys.F1 Then
                 conflict_check("F1")
@@ -250,7 +237,7 @@ Public Class Form1
     End Sub
 
     Private Sub StwagList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles list_mouse.CellClick
-        MessageBox.Show(list_mouse.CurrentRow.Index)
+        ' MessageBox.Show(list_mouse.CurrentRow.Index)
 
     End Sub
 
@@ -432,5 +419,33 @@ Public Class Form1
             _list.Rows(80).Cells(4).Value = "DOWN"
             _list.Rows(79).Cells(4).Value = "UP"
         End If
+    End Sub
+    Public Sub update_hold()
+        If CheckSHIFT.Checked = True Then
+            _list.Rows(_list.CurrentRow.Index).Cells(5).Value = "YES"
+        Else
+            _list.Rows(_list.CurrentRow.Index).Cells(5).Value = "NO"
+        End If
+        If CheckALT.Checked = True Then
+            _list.Rows(_list.CurrentRow.Index).Cells(6).Value = "YES"
+        Else
+            _list.Rows(_list.CurrentRow.Index).Cells(6).Value = "NO"
+        End If
+        If CheckCTRL.Checked = True Then
+            _list.Rows(_list.CurrentRow.Index).Cells(7).Value = "YES"
+        Else
+            _list.Rows(_list.CurrentRow.Index).Cells(7).Value = "NO"
+        End If
+    End Sub
+    Private Sub CheckALT_CheckedChanged(sender As Object, e As EventArgs) Handles CheckALT.CheckedChanged
+        update_hold()
+    End Sub
+
+    Private Sub CheckSHIFT_CheckedChanged(sender As Object, e As EventArgs) Handles CheckSHIFT.CheckedChanged
+        update_hold()
+    End Sub
+
+    Private Sub CheckCTRL_CheckedChanged(sender As Object, e As EventArgs) Handles CheckCTRL.CheckedChanged
+        update_hold()
     End Sub
 End Class
