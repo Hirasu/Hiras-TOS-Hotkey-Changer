@@ -55,6 +55,7 @@ Partial Class Form1
         Me.mouse_text = New System.Windows.Forms.RichTextBox()
         Me.list_mouse = New System.Windows.Forms.DataGridView()
         Me.load_delay = New System.Windows.Forms.Timer(Me.components)
+        Me.b_reset_default = New System.Windows.Forms.Button()
         CType(Me.list_key, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -92,7 +93,7 @@ Partial Class Form1
         'change_to
         '
         Me.change_to.Enabled = False
-        Me.change_to.Location = New System.Drawing.Point(34, 15)
+        Me.change_to.Location = New System.Drawing.Point(34, 17)
         Me.change_to.Name = "change_to"
         Me.change_to.Size = New System.Drawing.Size(83, 23)
         Me.change_to.TabIndex = 5
@@ -121,7 +122,7 @@ Partial Class Form1
         'change_enter
         '
         Me.change_enter.Enabled = False
-        Me.change_enter.Location = New System.Drawing.Point(21, 73)
+        Me.change_enter.Location = New System.Drawing.Point(21, 71)
         Me.change_enter.Name = "change_enter"
         Me.change_enter.Size = New System.Drawing.Size(106, 23)
         Me.change_enter.TabIndex = 8
@@ -139,20 +140,22 @@ Partial Class Form1
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.b_reset_default)
         Me.GroupBox1.Controls.Add(Me.b_reset_arrow)
         Me.GroupBox1.Controls.Add(Me.b_clear)
         Me.GroupBox1.Controls.Add(Me.change_to)
         Me.GroupBox1.Controls.Add(Me.change_tab)
         Me.GroupBox1.Controls.Add(Me.change_enter)
-        Me.GroupBox1.Location = New System.Drawing.Point(288, 277)
+        Me.GroupBox1.Location = New System.Drawing.Point(288, 264)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(143, 168)
+        Me.GroupBox1.Size = New System.Drawing.Size(143, 186)
         Me.GroupBox1.TabIndex = 10
         Me.GroupBox1.TabStop = False
         '
         'b_reset_arrow
         '
-        Me.b_reset_arrow.Location = New System.Drawing.Point(21, 102)
+        Me.b_reset_arrow.Enabled = False
+        Me.b_reset_arrow.Location = New System.Drawing.Point(21, 98)
         Me.b_reset_arrow.Name = "b_reset_arrow"
         Me.b_reset_arrow.Size = New System.Drawing.Size(106, 23)
         Me.b_reset_arrow.TabIndex = 10
@@ -162,11 +165,11 @@ Partial Class Form1
         'b_clear
         '
         Me.b_clear.Enabled = False
-        Me.b_clear.Location = New System.Drawing.Point(34, 131)
+        Me.b_clear.Location = New System.Drawing.Point(34, 152)
         Me.b_clear.Name = "b_clear"
         Me.b_clear.Size = New System.Drawing.Size(83, 23)
         Me.b_clear.TabIndex = 9
-        Me.b_clear.Text = "Clear"
+        Me.b_clear.Text = "Clear hotkey"
         Me.b_clear.UseVisualStyleBackColor = True
         '
         'GroupBox2
@@ -175,9 +178,9 @@ Partial Class Form1
         Me.GroupBox2.Controls.Add(Me.b_exit)
         Me.GroupBox2.Controls.Add(Me.b_save)
         Me.GroupBox2.Controls.Add(Me.b_reload_k)
-        Me.GroupBox2.Location = New System.Drawing.Point(287, 450)
+        Me.GroupBox2.Location = New System.Drawing.Point(287, 452)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(143, 131)
+        Me.GroupBox2.Size = New System.Drawing.Size(143, 133)
         Me.GroupBox2.TabIndex = 11
         Me.GroupBox2.TabStop = False
         '
@@ -214,9 +217,9 @@ Partial Class Form1
         'GroupBox4
         '
         Me.GroupBox4.Controls.Add(Me.changinginfo)
-        Me.GroupBox4.Location = New System.Drawing.Point(287, 231)
+        Me.GroupBox4.Location = New System.Drawing.Point(287, 227)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(147, 43)
+        Me.GroupBox4.Size = New System.Drawing.Size(147, 37)
         Me.GroupBox4.TabIndex = 13
         Me.GroupBox4.TabStop = False
         '
@@ -225,7 +228,7 @@ Partial Class Form1
         Me.changinginfo.BackColor = System.Drawing.SystemColors.Control
         Me.changinginfo.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.changinginfo.Cursor = System.Windows.Forms.Cursors.Default
-        Me.changinginfo.Location = New System.Drawing.Point(27, 17)
+        Me.changinginfo.Location = New System.Drawing.Point(27, 14)
         Me.changinginfo.Name = "changinginfo"
         Me.changinginfo.Size = New System.Drawing.Size(114, 17)
         Me.changinginfo.TabIndex = 0
@@ -387,6 +390,16 @@ Partial Class Form1
         '
         Me.load_delay.Interval = 1500
         '
+        'b_reset_default
+        '
+        Me.b_reset_default.Enabled = False
+        Me.b_reset_default.Location = New System.Drawing.Point(21, 125)
+        Me.b_reset_default.Name = "b_reset_default"
+        Me.b_reset_default.Size = New System.Drawing.Size(106, 23)
+        Me.b_reset_default.TabIndex = 11
+        Me.b_reset_default.Text = "Reset to default"
+        Me.b_reset_default.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -403,7 +416,7 @@ Partial Class Form1
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Hira's Tree of Savior Hotkey Changer v0.3.1@Hirasu"
+        Me.Text = "Hira's Tree of Savior Hotkey Changer v0.3.2@Hirasu"
         CType(Me.list_key, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
@@ -451,5 +464,6 @@ Partial Class Form1
     Friend WithEvents key_text As System.Windows.Forms.RichTextBox
     Friend WithEvents load_delay As System.Windows.Forms.Timer
     Friend WithEvents b_reset_arrow As System.Windows.Forms.Button
+    Friend WithEvents b_reset_default As System.Windows.Forms.Button
 
 End Class

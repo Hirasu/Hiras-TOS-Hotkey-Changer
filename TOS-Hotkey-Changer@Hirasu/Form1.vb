@@ -6,6 +6,8 @@ Imports System.IO
 Public Class Form1
     Private _Datafile As New FileInfo(Application.StartupPath & "\hotkey.xml")
     Private _Datafile2 As New FileInfo(Application.StartupPath & "\hotkey_mousemode.xml")
+    Private _Datafile_default As New FileInfo(Application.StartupPath & "\hotkey_default.xml")
+    Private _Datafile_default2 As New FileInfo(Application.StartupPath & "\hotkey_mousemode_default.xml")
     Public mode As Integer
     Private _change As New Integer
     Public _list As DataGridView
@@ -39,9 +41,14 @@ Public Class Form1
             CheckCTRL.CheckState = False
         End If
     End Sub
-    Private Sub Loading()
+    Public Function Loading(ByVal _default As Integer) As Integer
         Dim xmlFile As XmlReader
-        xmlFile = XmlReader.Create("hotkey.xml", New XmlReaderSettings())
+        If _default < 1 Then
+            xmlFile = XmlReader.Create("hotkey.xml", New XmlReaderSettings())
+        Else
+            xmlFile = XmlReader.Create("hotkey_default.xml", New XmlReaderSettings())
+        End If
+
         Dim ds As New DataSet
         ds.ReadXml(xmlFile)
 
@@ -80,11 +87,18 @@ Public Class Form1
 
 
         xmlFile.Close()
-    End Sub
+        Return True
+    End Function
 
-    Private Sub Loading_mouse()
+
+
+    Public Function Loading_mouse(ByVal _default As Integer) As Integer
         Dim xmlFile As XmlReader
-        xmlFile = XmlReader.Create("hotkey_mousemode.xml", New XmlReaderSettings())
+        If _default < 1 Then
+            xmlFile = XmlReader.Create("hotkey_mousemode.xml", New XmlReaderSettings())
+        Else
+            xmlFile = XmlReader.Create("hotkey_mousemode_default.xml", New XmlReaderSettings())
+        End If
         Dim ds_mouse As New DataSet
         ds_mouse.ReadXml(xmlFile)
         xmlFile.Close()
@@ -114,7 +128,7 @@ Public Class Form1
             chat_fix.Text = "Remove Fix"
         End If
 
-    End Sub
+    End Function
 
     Public Function conflict_check(ByVal _key As String) As String
         check_mode()
@@ -135,7 +149,7 @@ Public Class Form1
             _list.Rows(_list.CurrentRow.Index).Cells(4).Value = _key
         End If
         
- 
+        Return True
     End Function
 
     Private Sub Form1_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles change_to.KeyDown
@@ -231,8 +245,8 @@ Public Class Form1
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles b_exit.Click
 
         Select Case MessageBox.Show(Me, "Are you sure?", "Exit", MessageBoxButtons.YesNo)
-            Case DialogResult.No : Return           'nix tun: schließen ohne speichern
-            Case DialogResult.Yes : Me.Close()          ' schließen mit speichern
+            Case DialogResult.No : Return
+            Case DialogResult.Yes : Me.Close()
         End Select
     End Sub
 
@@ -262,7 +276,7 @@ Public Class Form1
             Dim curFile As String = _Datafile.FullName
 
             If File.Exists(curFile) Then
-                Loading()
+                Loading(0)
                 mode = "0"
             Else
                 MessageBox.Show("Can't find 'hotkey.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
@@ -275,6 +289,8 @@ Public Class Form1
                 b_clear.Enabled = True
                 chat_fix.Enabled = True
                 b_save.Enabled = True
+                b_reset_arrow.Enabled = True
+                b_reset_default.Enabled = True
             End If
         End If
     End Sub
@@ -288,7 +304,7 @@ Public Class Form1
             Dim curFile_mouse As String = _Datafile2.FullName
 
             If File.Exists(curFile_mouse) Then
-                Loading_mouse()
+                Loading_mouse(0)
 
             Else
                 MessageBox.Show("Can't find 'hotkey_mousemode.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
@@ -301,6 +317,8 @@ Public Class Form1
                 b_clear.Enabled = True
                 chat_fix.Enabled = True
                 b_save.Enabled = True
+                b_reset_arrow.Enabled = True
+                b_reset_default.Enabled = True
             End If
         End If
     End Sub
@@ -366,6 +384,8 @@ Public Class Form1
             b_clear.Enabled = True
             chat_fix.Enabled = True
             b_save.Enabled = True
+            b_reset_arrow.Enabled = True
+            b_reset_default.Enabled = True
         Else
 
             change_to.Enabled = False
@@ -374,6 +394,8 @@ Public Class Form1
             b_clear.Enabled = False
             chat_fix.Enabled = False
             b_save.Enabled = False
+            b_reset_arrow.Enabled = False
+            b_reset_default.Enabled = False
         End If
     End Sub
 
@@ -387,6 +409,8 @@ Public Class Form1
             b_clear.Enabled = True
             chat_fix.Enabled = True
             b_save.Enabled = True
+            b_reset_arrow.Enabled = True
+            b_reset_default.Enabled = True
         Else
 
             change_to.Enabled = False
@@ -395,6 +419,8 @@ Public Class Form1
             b_clear.Enabled = False
             chat_fix.Enabled = False
             b_save.Enabled = False
+            b_reset_arrow.Enabled = False
+            b_reset_default.Enabled = False
         End If
 
     End Sub
@@ -407,8 +433,6 @@ Public Class Form1
 
     Private Sub b_reset_arrow_Click(sender As Object, e As EventArgs) Handles b_reset_arrow.Click
         If mode = "0" Then
-
-
             _list.Rows(83).Cells(4).Value = "RIGHT"
             _list.Rows(82).Cells(4).Value = "LEFT"
             _list.Rows(81).Cells(4).Value = "DOWN"
@@ -447,5 +471,32 @@ Public Class Form1
 
     Private Sub CheckCTRL_CheckedChanged(sender As Object, e As EventArgs) Handles CheckCTRL.CheckedChanged
         update_hold()
+    End Sub
+
+    Private Sub b_reset_default_Click(sender As Object, e As EventArgs) Handles b_reset_default.Click
+        Select Case MessageBox.Show(Me, "Are you sure?", "Reset to default", MessageBoxButtons.YesNo)
+            Case DialogResult.No : Return
+            Case DialogResult.Yes
+                If mode = "0" Then
+                    Dim curFile As String = _Datafile_default.FullName
+
+                    If File.Exists(curFile) Then
+                        Loading(1)
+                    Else
+                        MessageBox.Show("Can't find 'hotkey.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
+                        Me.Close()
+                    End If
+
+                Else
+                    Dim curFile_mouse As String = _Datafile_default2.FullName
+
+                    If File.Exists(curFile_mouse) Then
+                        Loading_mouse(1)
+                    Else
+                        MessageBox.Show("Can't find 'hotkey_mousemode.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
+                        Me.Close()
+                    End If
+                End If
+        End Select
     End Sub
 End Class
