@@ -32,6 +32,7 @@ Partial Class Form1
         Me.change_enter = New System.Windows.Forms.Button()
         Me.b_reload_k = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.b_reset_default = New System.Windows.Forms.Button()
         Me.b_reset_arrow = New System.Windows.Forms.Button()
         Me.b_clear = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -55,7 +56,6 @@ Partial Class Form1
         Me.mouse_text = New System.Windows.Forms.RichTextBox()
         Me.list_mouse = New System.Windows.Forms.DataGridView()
         Me.load_delay = New System.Windows.Forms.Timer(Me.components)
-        Me.b_reset_default = New System.Windows.Forms.Button()
         CType(Me.list_key, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -75,6 +75,7 @@ Partial Class Form1
         Me.list_key.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.list_key.Location = New System.Drawing.Point(0, 0)
         Me.list_key.Name = "list_key"
+        Me.list_key.RowHeadersVisible = False
         Me.list_key.RowHeadersWidth = 33
         Me.list_key.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.list_key.Size = New System.Drawing.Size(252, 403)
@@ -151,6 +152,16 @@ Partial Class Form1
         Me.GroupBox1.Size = New System.Drawing.Size(143, 186)
         Me.GroupBox1.TabIndex = 10
         Me.GroupBox1.TabStop = False
+        '
+        'b_reset_default
+        '
+        Me.b_reset_default.Enabled = False
+        Me.b_reset_default.Location = New System.Drawing.Point(21, 125)
+        Me.b_reset_default.Name = "b_reset_default"
+        Me.b_reset_default.Size = New System.Drawing.Size(106, 23)
+        Me.b_reset_default.TabIndex = 11
+        Me.b_reset_default.Text = "Reset to default"
+        Me.b_reset_default.UseVisualStyleBackColor = True
         '
         'b_reset_arrow
         '
@@ -381,6 +392,7 @@ Partial Class Form1
         Me.list_mouse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.list_mouse.Location = New System.Drawing.Point(0, 0)
         Me.list_mouse.Name = "list_mouse"
+        Me.list_mouse.RowHeadersVisible = False
         Me.list_mouse.RowHeadersWidth = 33
         Me.list_mouse.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.list_mouse.Size = New System.Drawing.Size(252, 403)
@@ -389,16 +401,6 @@ Partial Class Form1
         'load_delay
         '
         Me.load_delay.Interval = 1500
-        '
-        'b_reset_default
-        '
-        Me.b_reset_default.Enabled = False
-        Me.b_reset_default.Location = New System.Drawing.Point(21, 125)
-        Me.b_reset_default.Name = "b_reset_default"
-        Me.b_reset_default.Size = New System.Drawing.Size(106, 23)
-        Me.b_reset_default.TabIndex = 11
-        Me.b_reset_default.Text = "Reset to default"
-        Me.b_reset_default.UseVisualStyleBackColor = True
         '
         'Form1
         '

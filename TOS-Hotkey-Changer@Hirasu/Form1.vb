@@ -57,6 +57,7 @@ Public Class Form1
         list_key.Columns("ID").HeaderText = "Name"
         list_key.Columns("KEY").ReadOnly = True
         list_key.Columns("KEY").HeaderText = "Hotkey"
+        
         list_key.Columns(1).Visible = False
         list_key.Columns(2).Visible = False
         list_key.Columns(3).Visible = False
@@ -83,11 +84,14 @@ Public Class Form1
         If list_key.Rows(105).Cells(4).Value = "" Then
             chat_fix.Text = "Remove Fix"
         End If
-
-
+        Dim column As DataGridViewColumn = list_key.Columns(0)
+        column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        Dim column2 As DataGridViewColumn = list_key.Columns(4)
+        column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        Return False
 
         xmlFile.Close()
-        Return True
+        Return False
     End Function
 
 
@@ -127,7 +131,11 @@ Public Class Form1
         If list_mouse.Rows(99).Cells(4).Value = "" Then
             chat_fix.Text = "Remove Fix"
         End If
-
+        Dim column As DataGridViewColumn = list_mouse.Columns(0)
+        column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        Dim column2 As DataGridViewColumn = list_mouse.Columns(4)
+        column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        Return False
     End Function
 
     Public Function conflict_check(ByVal _key As String) As String
@@ -218,6 +226,7 @@ Public Class Form1
             _change = "0"
             changinginfo.Text = "Choose a hotkey..."
         End If
+
     End Sub
 
 
