@@ -1,7 +1,7 @@
 # Hiras-TOS-Hotkey-Changer
 Hotkey changer for Tree of Savior @ Hirasu
 
-reddit: https://www.reddit.com/r/treeofsavior/comments/3qnowr/tree_of_savior_first_hotkey_changer_for_everyone/
+reddit: https://redd.it/3qnowr
 Do to list:
 -
 Rename the "Name" column items
