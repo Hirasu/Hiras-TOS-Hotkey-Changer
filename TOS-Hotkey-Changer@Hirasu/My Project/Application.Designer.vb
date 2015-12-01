@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.TOS_Hotkey_Changer_Hirasu.Form1
+            Me.MainForm = Global.TOS_Hotkey_Changer_Hirasu.Hotkey_changer
         End Sub
     End Class
 End Namespace
