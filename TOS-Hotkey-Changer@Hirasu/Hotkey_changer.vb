@@ -518,6 +518,9 @@ Public Class Hotkey_changer
     Private Sub b_clear_Click(sender As Object, e As EventArgs) Handles b_clear.Click
         check_mode()
         _list.Rows(_list.CurrentRow.Index).Cells(4).Value = ""
+        If mode = "2" Then
+            _list.Rows(_list.CurrentRow.Index).Cells(5).Value = ""
+        End If
     End Sub
 
     Private Sub oncellclick(sender As Object, e As EventArgs) Handles list_key.CellClick
@@ -624,6 +627,10 @@ Public Class Hotkey_changer
             chat_fix.Enabled = True
             b_save.Enabled = True
             b_reset_default.Enabled = True
+            change_tab.Enabled = False
+            change_enter.Enabled = False
+            b_clear.Enabled = True
+            b_reset_arrow.Enabled = False
         Else
 
             change_to.Enabled = False
