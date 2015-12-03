@@ -51,12 +51,12 @@ Partial Class Hotkey_changer
         Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
         Me.chat_fix = New System.Windows.Forms.Button()
         Me.Mode_tab = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.KeyPage = New System.Windows.Forms.TabPage()
         Me.key_text = New System.Windows.Forms.RichTextBox()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.MousePage = New System.Windows.Forms.TabPage()
         Me.mouse_text = New System.Windows.Forms.RichTextBox()
         Me.list_mouse = New System.Windows.Forms.DataGridView()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.JoystickPage = New System.Windows.Forms.TabPage()
         Me.joystick_text = New System.Windows.Forms.RichTextBox()
         Me.list_joystick = New System.Windows.Forms.DataGridView()
         Me.load_delay = New System.Windows.Forms.Timer(Me.components)
@@ -73,10 +73,10 @@ Partial Class Hotkey_changer
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.Mode_tab.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
+        Me.KeyPage.SuspendLayout()
+        Me.MousePage.SuspendLayout()
         CType(Me.list_mouse, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage3.SuspendLayout()
+        Me.JoystickPage.SuspendLayout()
         CType(Me.list_joystick, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -92,7 +92,7 @@ Partial Class Hotkey_changer
         Me.list_key.RowHeadersVisible = False
         Me.list_key.RowHeadersWidth = 33
         Me.list_key.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.list_key.Size = New System.Drawing.Size(442, 434)
+        Me.list_key.Size = New System.Drawing.Size(252, 419)
         Me.list_key.TabIndex = 1
         '
         'b_save
@@ -155,14 +155,14 @@ Partial Class Hotkey_changer
         '
         'GroupBox1
         '
-        Me.GroupBox1.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.GroupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.b_reset_default)
         Me.GroupBox1.Controls.Add(Me.b_reset_arrow)
         Me.GroupBox1.Controls.Add(Me.b_clear)
         Me.GroupBox1.Controls.Add(Me.change_to)
         Me.GroupBox1.Controls.Add(Me.change_tab)
         Me.GroupBox1.Controls.Add(Me.change_enter)
-        Me.GroupBox1.Location = New System.Drawing.Point(472, 264)
+        Me.GroupBox1.Location = New System.Drawing.Point(472, 249)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(143, 186)
         Me.GroupBox1.TabIndex = 10
@@ -200,13 +200,13 @@ Partial Class Hotkey_changer
         '
         'GroupBox2
         '
-        Me.GroupBox2.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.GroupBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox2.Controls.Add(Me.b_reload_joystick)
         Me.GroupBox2.Controls.Add(Me.b_reload_mouse)
         Me.GroupBox2.Controls.Add(Me.b_exit)
         Me.GroupBox2.Controls.Add(Me.b_save)
         Me.GroupBox2.Controls.Add(Me.b_reload_k)
-        Me.GroupBox2.Location = New System.Drawing.Point(471, 452)
+        Me.GroupBox2.Location = New System.Drawing.Point(471, 437)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(143, 164)
         Me.GroupBox2.TabIndex = 11
@@ -232,9 +232,9 @@ Partial Class Hotkey_changer
         '
         'GroupBox3
         '
-        Me.GroupBox3.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.GroupBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox3.Controls.Add(Me.RichTextBox1)
-        Me.GroupBox3.Location = New System.Drawing.Point(471, 12)
+        Me.GroupBox3.Location = New System.Drawing.Point(471, -3)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(143, 66)
         Me.GroupBox3.TabIndex = 12
@@ -254,9 +254,9 @@ Partial Class Hotkey_changer
         '
         'GroupBox4
         '
-        Me.GroupBox4.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.GroupBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox4.Controls.Add(Me.changinginfo)
-        Me.GroupBox4.Location = New System.Drawing.Point(471, 227)
+        Me.GroupBox4.Location = New System.Drawing.Point(471, 212)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(147, 37)
         Me.GroupBox4.TabIndex = 13
@@ -287,11 +287,11 @@ Partial Class Hotkey_changer
         '
         'GroupBox5
         '
-        Me.GroupBox5.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.GroupBox5.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox5.Controls.Add(Me.CheckCTRL)
         Me.GroupBox5.Controls.Add(Me.CheckSHIFT)
         Me.GroupBox5.Controls.Add(Me.CheckALT)
-        Me.GroupBox5.Location = New System.Drawing.Point(472, 78)
+        Me.GroupBox5.Location = New System.Drawing.Point(472, 63)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(143, 71)
         Me.GroupBox5.TabIndex = 16
@@ -330,10 +330,10 @@ Partial Class Hotkey_changer
         '
         'GroupBox6
         '
-        Me.GroupBox6.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.GroupBox6.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox6.Controls.Add(Me.RichTextBox2)
         Me.GroupBox6.Controls.Add(Me.chat_fix)
-        Me.GroupBox6.Location = New System.Drawing.Point(472, 149)
+        Me.GroupBox6.Location = New System.Drawing.Point(472, 134)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Size = New System.Drawing.Size(146, 78)
         Me.GroupBox6.TabIndex = 17
@@ -364,27 +364,28 @@ Partial Class Hotkey_changer
         '
         'Mode_tab
         '
-        Me.Mode_tab.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.Mode_tab.Controls.Add(Me.TabPage1)
-        Me.Mode_tab.Controls.Add(Me.TabPage2)
-        Me.Mode_tab.Controls.Add(Me.TabPage3)
+        Me.Mode_tab.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Mode_tab.Controls.Add(Me.KeyPage)
+        Me.Mode_tab.Controls.Add(Me.MousePage)
+        Me.Mode_tab.Controls.Add(Me.JoystickPage)
         Me.Mode_tab.Location = New System.Drawing.Point(13, 156)
         Me.Mode_tab.Name = "Mode_tab"
         Me.Mode_tab.SelectedIndex = 0
-        Me.Mode_tab.Size = New System.Drawing.Size(450, 460)
+        Me.Mode_tab.Size = New System.Drawing.Size(450, 445)
         Me.Mode_tab.TabIndex = 18
         '
-        'TabPage1
+        'KeyPage
         '
-        Me.TabPage1.Controls.Add(Me.key_text)
-        Me.TabPage1.Controls.Add(Me.list_key)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(442, 434)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Keyboard Mode"
-        Me.TabPage1.UseVisualStyleBackColor = True
+        Me.KeyPage.Controls.Add(Me.key_text)
+        Me.KeyPage.Controls.Add(Me.list_key)
+        Me.KeyPage.Location = New System.Drawing.Point(4, 22)
+        Me.KeyPage.Name = "KeyPage"
+        Me.KeyPage.Padding = New System.Windows.Forms.Padding(3)
+        Me.KeyPage.Size = New System.Drawing.Size(442, 419)
+        Me.KeyPage.TabIndex = 0
+        Me.KeyPage.Text = "Keyboard Mode"
+        Me.KeyPage.UseVisualStyleBackColor = True
         '
         'key_text
         '
@@ -397,17 +398,17 @@ Partial Class Hotkey_changer
         Me.key_text.TabIndex = 4
         Me.key_text.Text = "Click on the ""Reload Keyboard Mode"" button"
         '
-        'TabPage2
+        'MousePage
         '
-        Me.TabPage2.Controls.Add(Me.mouse_text)
-        Me.TabPage2.Controls.Add(Me.list_mouse)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(442, 434)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Mouse Mode"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        Me.MousePage.Controls.Add(Me.mouse_text)
+        Me.MousePage.Controls.Add(Me.list_mouse)
+        Me.MousePage.Location = New System.Drawing.Point(4, 22)
+        Me.MousePage.Name = "MousePage"
+        Me.MousePage.Padding = New System.Windows.Forms.Padding(3)
+        Me.MousePage.Size = New System.Drawing.Size(442, 419)
+        Me.MousePage.TabIndex = 1
+        Me.MousePage.Text = "Mouse Mode"
+        Me.MousePage.UseVisualStyleBackColor = True
         '
         'mouse_text
         '
@@ -433,20 +434,20 @@ Partial Class Hotkey_changer
         Me.list_mouse.RowHeadersVisible = False
         Me.list_mouse.RowHeadersWidth = 33
         Me.list_mouse.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.list_mouse.Size = New System.Drawing.Size(252, 434)
+        Me.list_mouse.Size = New System.Drawing.Size(252, 419)
         Me.list_mouse.TabIndex = 2
         '
-        'TabPage3
+        'JoystickPage
         '
-        Me.TabPage3.Controls.Add(Me.joystick_text)
-        Me.TabPage3.Controls.Add(Me.list_joystick)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(442, 434)
-        Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "Joystick Mode*"
-        Me.TabPage3.UseVisualStyleBackColor = True
+        Me.JoystickPage.Controls.Add(Me.joystick_text)
+        Me.JoystickPage.Controls.Add(Me.list_joystick)
+        Me.JoystickPage.Location = New System.Drawing.Point(4, 22)
+        Me.JoystickPage.Name = "JoystickPage"
+        Me.JoystickPage.Padding = New System.Windows.Forms.Padding(3)
+        Me.JoystickPage.Size = New System.Drawing.Size(442, 419)
+        Me.JoystickPage.TabIndex = 2
+        Me.JoystickPage.Text = "Joystick Mode*"
+        Me.JoystickPage.UseVisualStyleBackColor = True
         '
         'joystick_text
         '
@@ -472,7 +473,7 @@ Partial Class Hotkey_changer
         Me.list_joystick.RowHeadersVisible = False
         Me.list_joystick.RowHeadersWidth = 33
         Me.list_joystick.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.list_joystick.Size = New System.Drawing.Size(252, 434)
+        Me.list_joystick.Size = New System.Drawing.Size(252, 419)
         Me.list_joystick.TabIndex = 3
         '
         'load_delay
@@ -499,6 +500,7 @@ Partial Class Hotkey_changer
         'R_Pressedkey
         '
         Me.R_Pressedkey.AutoSize = True
+        Me.R_Pressedkey.Checked = True
         Me.R_Pressedkey.Location = New System.Drawing.Point(368, 147)
         Me.R_Pressedkey.Name = "R_Pressedkey"
         Me.R_Pressedkey.Size = New System.Drawing.Size(80, 17)
@@ -524,7 +526,7 @@ Partial Class Hotkey_changer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(627, 627)
+        Me.ClientSize = New System.Drawing.Size(627, 612)
         Me.Controls.Add(Me.R_Pressedkey)
         Me.Controls.Add(Me.R_Hotkey)
         Me.Controls.Add(Me.JoyInfoBox)
@@ -551,10 +553,10 @@ Partial Class Hotkey_changer
         Me.GroupBox5.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.Mode_tab.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
-        Me.TabPage2.ResumeLayout(False)
+        Me.KeyPage.ResumeLayout(False)
+        Me.MousePage.ResumeLayout(False)
         CType(Me.list_mouse, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage3.ResumeLayout(False)
+        Me.JoystickPage.ResumeLayout(False)
         CType(Me.list_joystick, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -584,15 +586,15 @@ Partial Class Hotkey_changer
     Friend WithEvents b_reload_mouse As System.Windows.Forms.Button
     Friend WithEvents b_clear As System.Windows.Forms.Button
     Friend WithEvents Mode_tab As System.Windows.Forms.TabControl
-    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
+    Friend WithEvents KeyPage As System.Windows.Forms.TabPage
+    Friend WithEvents MousePage As System.Windows.Forms.TabPage
     Friend WithEvents list_mouse As System.Windows.Forms.DataGridView
     Friend WithEvents mouse_text As System.Windows.Forms.RichTextBox
     Friend WithEvents key_text As System.Windows.Forms.RichTextBox
     Friend WithEvents load_delay As System.Windows.Forms.Timer
     Friend WithEvents b_reset_arrow As System.Windows.Forms.Button
     Friend WithEvents b_reset_default As System.Windows.Forms.Button
-    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
+    Friend WithEvents JoystickPage As System.Windows.Forms.TabPage
     Friend WithEvents list_joystick As System.Windows.Forms.DataGridView
     Friend WithEvents b_reload_joystick As System.Windows.Forms.Button
     Friend WithEvents joystick_text As System.Windows.Forms.RichTextBox

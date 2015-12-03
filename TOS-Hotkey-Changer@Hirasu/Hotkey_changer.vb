@@ -26,29 +26,42 @@ Public Class Hotkey_changer
     End Structure
 
     Dim myjoyEX As JOYINFOEX
-    Public _Datafile_key As New FileInfo(Application.StartupPath & "\hotkey.xml")
-    Public _Datafile_mouse As New FileInfo(Application.StartupPath & "\hotkey_mousemode.xml")
-    Public _Datafile_joystick As New FileInfo(Application.StartupPath & "\hotkey_joystick.xml")
-    Public _Datafile_default_key As New FileInfo(Application.StartupPath & "\hotkey_default.xml")
-    Public _Datafile_default_mouse As New FileInfo(Application.StartupPath & "\hotkey_mousemode_default.xml")
-    Public _Datafile_default_joystick As New FileInfo(Application.StartupPath & "\hotkey_joystick_default.xml")
+    Private _Datafile_key As New FileInfo(Application.StartupPath & "\hotkey.xml")
+    Private _Datafile_mouse As New FileInfo(Application.StartupPath & "\hotkey_mousemode.xml")
+    Private _Datafile_joystick As New FileInfo(Application.StartupPath & "\hotkey_joystick.xml")
+    Private _Datafile_default_key As New FileInfo(Application.StartupPath & "\hotkey_default.xml")
+    Private _Datafile_default_mouse As New FileInfo(Application.StartupPath & "\hotkey_mousemode_default.xml")
+    Private _Datafile_default_joystick As New FileInfo(Application.StartupPath & "\hotkey_joystick_default.xml")
 
-    Public mode As Integer
-    Public _change As New Integer
-    Public _list As DataGridView
-    Public can_load As Integer = "0"
-    Public curColumn As Integer = 4
-    Public BCodeCache As New Label
-    Public JoyNumber As New Label
-    Public POV As New Label
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private mode As Integer
+    Private _change As New Integer
+    Private _list As DataGridView
+    Private can_load As Integer = "0"
+    Private curColumn As Integer = 4
+    Private BCodeCache As New Label
+    Private JoyNumber As New Label
+    Private POV As New Label
+    Private Sub Initialize(sender As Object, e As EventArgs) Handles MyBase.Load
         myjoyEX.dwSize = 64
         myjoyEX.dwFlags = &HFF
-        Me.Size = New Size(459, Me.Size.Height)
-        Mode_tab.Size = New Size(260, 460)
-        list_joystick.Size = New Size(252, 434)
+        resize_default()
+        list_key.RowHeadersVisible = False
+        list_mouse.RowHeadersVisible = False
+        list_joystick.RowHeadersVisible = False
     End Sub
-    Public Sub check_mode()
+
+    Private Sub resize_default()
+        Me.Size = New Size(459, Me.Size.Height)
+        Mode_tab.Size = New Size(260, Mode_tab.Height)
+        list_joystick.Size = New Size(252, list_joystick.Height)
+    End Sub
+    Private Sub resize_joystick()
+        Me.Size = New Size(643, Me.Size.Height)
+        Mode_tab.Size = New Size(450, Mode_tab.Height)
+        list_joystick.Size = New Size(442, list_joystick.Height)
+    End Sub
+
+    Private Sub check_mode()
         If mode = "0" Then
             _list = list_key
         ElseIf mode = "1" Then
@@ -77,7 +90,7 @@ Public Class Hotkey_changer
             CheckCTRL.CheckState = False
         End If
     End Sub
-    Public Function Loading(ByVal _default As Integer) As Integer
+    Private Function Loading(ByVal _default As Integer) As Integer
         Dim xmlFile As XmlReader
         If _default < 1 Then
             xmlFile = XmlReader.Create("hotkey.xml", New XmlReaderSettings())
@@ -132,7 +145,7 @@ Public Class Hotkey_changer
 
 
 
-    Public Function Loading_mouse(ByVal _default As Integer) As Integer
+    Private Function Loading_mouse(ByVal _default As Integer) As Integer
         Dim xmlFile As XmlReader
         If _default < 1 Then
             xmlFile = XmlReader.Create("hotkey_mousemode.xml", New XmlReaderSettings())
@@ -174,7 +187,7 @@ Public Class Hotkey_changer
         Return False
     End Function
 
-    Public Function Loading_joystick(ByVal _default As Integer) As Integer
+    Private Function Loading_joystick(ByVal _default As Integer) As Integer
         Dim xmlFile_joy As XmlReader
         If _default < 1 Then
             xmlFile_joy = XmlReader.Create("hotkey_joystick.xml", New XmlReaderSettings())
@@ -212,7 +225,7 @@ Public Class Hotkey_changer
         column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         Return False
     End Function
-    Public Function conflict_check(ByVal _key As String) As String
+    Private Function conflict_check(ByVal _key As String) As String
         check_mode()
         If mode = "2" Then
             If _list.Rows(_list.CurrentRow.Index).Cells(curColumn).Value = _key Then
@@ -252,7 +265,7 @@ Public Class Hotkey_changer
                 _list.Rows(_list.CurrentRow.Index).Cells(4).Value = _key
             End If
         End If
-        
+
 
         Return True
     End Function
@@ -532,15 +545,13 @@ Public Class Hotkey_changer
         check_hold_keys()
     End Sub
 
-    Private Sub Page_key_Click(sender As Object, e As EventArgs) Handles TabPage1.Enter
+    Private Sub Page_key_Click(sender As Object, e As EventArgs) Handles KeyPage.Enter
         mode = "0"
         check_mode()
+        resize_default()
         _change = "0"
         changinginfo.Text = "Choose a hotkey..."
         Joystick_checker.Stop()
-        Me.Size = New Size(459, Me.Size.Height)
-        Mode_tab.Size = New Size(260, 460)
-        list_joystick.Size = New Size(252, 434)
         JoyInfoBox.Visible = False
         CheckALT.Enabled = True
         CheckSHIFT.Enabled = True
@@ -569,16 +580,13 @@ Public Class Hotkey_changer
         End If
     End Sub
 
-    Private Sub Page_mouse_Click(sender As Object, e As EventArgs) Handles TabPage2.Enter
+    Private Sub Page_mouse_Click(sender As Object, e As EventArgs) Handles MousePage.Enter
         mode = "1"
-
         check_mode()
+        resize_default()
         _change = "0"
         changinginfo.Text = "Choose a hotkey..."
         Joystick_checker.Stop()
-        Me.Size = New Size(459, Me.Size.Height)
-        Mode_tab.Size = New Size(260, 460)
-        list_joystick.Size = New Size(252, 434)
         JoyInfoBox.Visible = False
         CheckALT.Enabled = True
         CheckSHIFT.Enabled = True
@@ -607,12 +615,10 @@ Public Class Hotkey_changer
         End If
 
     End Sub
-    Private Sub Page_Joystick_Click(sender As Object, e As EventArgs) Handles TabPage3.Enter
+    Private Sub Page_Joystick_Click(sender As Object, e As EventArgs) Handles JoystickPage.Enter
         mode = "2"
         check_mode()
-        Me.Size = New Size(643, Me.Size.Height)
-        Mode_tab.Size = New Size(450, 460)
-        list_joystick.Size = New Size(442, 434)
+        resize_joystick()
         JoyInfoBox.Visible = True
         Joystick_checker.Interval = 17
         Joystick_checker.Start()
@@ -664,7 +670,7 @@ Public Class Hotkey_changer
             _list.Rows(79).Cells(4).Value = "UP"
         End If
     End Sub
-    Public Sub update_hold()
+    Private Sub update_hold()
         If CheckSHIFT.Checked = True Then
             _list.Rows(_list.CurrentRow.Index).Cells(5).Value = "YES"
         Else
