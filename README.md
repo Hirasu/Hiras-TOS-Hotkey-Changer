@@ -51,3 +51,8 @@ UDATE v0.3.1:
 -QuickSlot10 re-added
 
 -Move Right/left/down/up hotkey added
+
+-
+UDATE v0.4.0:
+-
+-Joystick Support added!
