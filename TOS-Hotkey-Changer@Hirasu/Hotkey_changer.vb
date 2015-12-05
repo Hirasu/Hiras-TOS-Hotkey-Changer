@@ -36,7 +36,7 @@ Public Class Hotkey_changer
     Private mode As Integer
     Private _change As New Integer
     Private _list As DataGridView
-    Private can_load As Integer = "0"
+    Private can_load As Integer = 0
     Private curColumn As Integer = 4
     Private BCodeCache As New Label
     Private JoyNumber As New Label
@@ -549,8 +549,6 @@ Public Class Hotkey_changer
         mode = "0"
         check_mode()
         resize_default()
-        _change = "0"
-        changinginfo.Text = "Choose a hotkey..."
         Joystick_checker.Stop()
         JoyInfoBox.Visible = False
         CheckALT.Enabled = True
@@ -584,8 +582,6 @@ Public Class Hotkey_changer
         mode = "1"
         check_mode()
         resize_default()
-        _change = "0"
-        changinginfo.Text = "Choose a hotkey..."
         Joystick_checker.Stop()
         JoyInfoBox.Visible = False
         CheckALT.Enabled = True
@@ -830,5 +826,10 @@ Public Class Hotkey_changer
             R_Hotkey.Checked = True
             curColumn = 4
         End If
+    End Sub
+
+    Private Sub change_to_Leave(sender As Object, e As EventArgs) Handles change_to.Leave
+        _change = "0"
+        changinginfo.Text = "Choose a hotkey..."
     End Sub
 End Class

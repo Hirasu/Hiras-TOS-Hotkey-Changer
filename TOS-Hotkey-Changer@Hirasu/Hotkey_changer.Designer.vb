@@ -492,7 +492,6 @@ Partial Class Hotkey_changer
         Me.R_Hotkey.Name = "R_Hotkey"
         Me.R_Hotkey.Size = New System.Drawing.Size(59, 17)
         Me.R_Hotkey.TabIndex = 5
-        Me.R_Hotkey.TabStop = True
         Me.R_Hotkey.Text = "Hotkey"
         Me.R_Hotkey.UseVisualStyleBackColor = True
         Me.R_Hotkey.Visible = False
@@ -500,12 +499,10 @@ Partial Class Hotkey_changer
         'R_Pressedkey
         '
         Me.R_Pressedkey.AutoSize = True
-        Me.R_Pressedkey.Checked = True
         Me.R_Pressedkey.Location = New System.Drawing.Point(368, 147)
         Me.R_Pressedkey.Name = "R_Pressedkey"
         Me.R_Pressedkey.Size = New System.Drawing.Size(80, 17)
         Me.R_Pressedkey.TabIndex = 20
-        Me.R_Pressedkey.TabStop = True
         Me.R_Pressedkey.Text = "Pressedkey"
         Me.R_Pressedkey.UseVisualStyleBackColor = True
         Me.R_Pressedkey.Visible = False
