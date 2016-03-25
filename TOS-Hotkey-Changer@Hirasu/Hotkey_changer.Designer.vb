@@ -33,7 +33,6 @@ Partial Class Hotkey_changer
         Me.b_reload_k = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.b_reset_default = New System.Windows.Forms.Button()
-        Me.b_reset_arrow = New System.Windows.Forms.Button()
         Me.b_clear = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.b_reload_joystick = New System.Windows.Forms.Button()
@@ -59,7 +58,6 @@ Partial Class Hotkey_changer
         Me.JoystickPage = New System.Windows.Forms.TabPage()
         Me.joystick_text = New System.Windows.Forms.RichTextBox()
         Me.list_joystick = New System.Windows.Forms.DataGridView()
-        Me.load_delay = New System.Windows.Forms.Timer(Me.components)
         Me.Joystick_checker = New System.Windows.Forms.Timer(Me.components)
         Me.R_Hotkey = New System.Windows.Forms.RadioButton()
         Me.R_Pressedkey = New System.Windows.Forms.RadioButton()
@@ -84,9 +82,9 @@ Partial Class Hotkey_changer
         '
         Me.list_key.AllowUserToAddRows = False
         Me.list_key.AllowUserToDeleteRows = False
-        Me.list_key.AllowUserToResizeColumns = False
         Me.list_key.AllowUserToResizeRows = False
         Me.list_key.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.list_key.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.list_key.Location = New System.Drawing.Point(0, 0)
         Me.list_key.Name = "list_key"
         Me.list_key.RowHeadersVisible = False
@@ -157,41 +155,30 @@ Partial Class Hotkey_changer
         '
         Me.GroupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.b_reset_default)
-        Me.GroupBox1.Controls.Add(Me.b_reset_arrow)
         Me.GroupBox1.Controls.Add(Me.b_clear)
         Me.GroupBox1.Controls.Add(Me.change_to)
         Me.GroupBox1.Controls.Add(Me.change_tab)
         Me.GroupBox1.Controls.Add(Me.change_enter)
         Me.GroupBox1.Location = New System.Drawing.Point(472, 249)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(143, 186)
+        Me.GroupBox1.Size = New System.Drawing.Size(143, 156)
         Me.GroupBox1.TabIndex = 10
         Me.GroupBox1.TabStop = False
         '
         'b_reset_default
         '
         Me.b_reset_default.Enabled = False
-        Me.b_reset_default.Location = New System.Drawing.Point(21, 125)
+        Me.b_reset_default.Location = New System.Drawing.Point(21, 98)
         Me.b_reset_default.Name = "b_reset_default"
         Me.b_reset_default.Size = New System.Drawing.Size(106, 23)
         Me.b_reset_default.TabIndex = 11
         Me.b_reset_default.Text = "Reset to default"
         Me.b_reset_default.UseVisualStyleBackColor = True
         '
-        'b_reset_arrow
-        '
-        Me.b_reset_arrow.Enabled = False
-        Me.b_reset_arrow.Location = New System.Drawing.Point(21, 98)
-        Me.b_reset_arrow.Name = "b_reset_arrow"
-        Me.b_reset_arrow.Size = New System.Drawing.Size(106, 23)
-        Me.b_reset_arrow.TabIndex = 10
-        Me.b_reset_arrow.Text = "Reset Arrow Keys"
-        Me.b_reset_arrow.UseVisualStyleBackColor = True
-        '
         'b_clear
         '
         Me.b_clear.Enabled = False
-        Me.b_clear.Location = New System.Drawing.Point(34, 152)
+        Me.b_clear.Location = New System.Drawing.Point(34, 124)
         Me.b_clear.Name = "b_clear"
         Me.b_clear.Size = New System.Drawing.Size(83, 23)
         Me.b_clear.TabIndex = 9
@@ -234,7 +221,7 @@ Partial Class Hotkey_changer
         '
         Me.GroupBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox3.Controls.Add(Me.RichTextBox1)
-        Me.GroupBox3.Location = New System.Drawing.Point(471, -3)
+        Me.GroupBox3.Location = New System.Drawing.Point(471, 0)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(143, 66)
         Me.GroupBox3.TabIndex = 12
@@ -245,12 +232,12 @@ Partial Class Hotkey_changer
         '
         Me.RichTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.RichTextBox1.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RichTextBox1.Location = New System.Drawing.Point(12, 17)
+        Me.RichTextBox1.Location = New System.Drawing.Point(9, 17)
         Me.RichTextBox1.Name = "RichTextBox1"
         Me.RichTextBox1.ReadOnly = True
-        Me.RichTextBox1.Size = New System.Drawing.Size(106, 40)
+        Me.RichTextBox1.Size = New System.Drawing.Size(129, 43)
         Me.RichTextBox1.TabIndex = 1
-        Me.RichTextBox1.Text = "Click on a hotkey in the list when press a ""Change to"" button"
+        Me.RichTextBox1.Text = "Doubleclick on a hotkey or press one of the ""Change to"" button"
         '
         'GroupBox4
         '
@@ -291,7 +278,7 @@ Partial Class Hotkey_changer
         Me.GroupBox5.Controls.Add(Me.CheckCTRL)
         Me.GroupBox5.Controls.Add(Me.CheckSHIFT)
         Me.GroupBox5.Controls.Add(Me.CheckALT)
-        Me.GroupBox5.Location = New System.Drawing.Point(472, 63)
+        Me.GroupBox5.Location = New System.Drawing.Point(472, 65)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(143, 71)
         Me.GroupBox5.TabIndex = 16
@@ -426,9 +413,9 @@ Partial Class Hotkey_changer
         Me.list_mouse.AllowUserToAddRows = False
         Me.list_mouse.AllowUserToDeleteRows = False
         Me.list_mouse.AllowUserToOrderColumns = True
-        Me.list_mouse.AllowUserToResizeColumns = False
         Me.list_mouse.AllowUserToResizeRows = False
         Me.list_mouse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.list_mouse.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.list_mouse.Location = New System.Drawing.Point(0, 0)
         Me.list_mouse.Name = "list_mouse"
         Me.list_mouse.RowHeadersVisible = False
@@ -464,10 +451,10 @@ Partial Class Hotkey_changer
         '
         Me.list_joystick.AllowUserToAddRows = False
         Me.list_joystick.AllowUserToDeleteRows = False
-        Me.list_joystick.AllowUserToResizeColumns = False
         Me.list_joystick.AllowUserToResizeRows = False
         Me.list_joystick.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.list_joystick.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.list_joystick.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.list_joystick.Location = New System.Drawing.Point(0, 0)
         Me.list_joystick.Name = "list_joystick"
         Me.list_joystick.RowHeadersVisible = False
@@ -475,10 +462,6 @@ Partial Class Hotkey_changer
         Me.list_joystick.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.list_joystick.Size = New System.Drawing.Size(252, 419)
         Me.list_joystick.TabIndex = 3
-        '
-        'load_delay
-        '
-        Me.load_delay.Interval = 1500
         '
         'Joystick_checker
         '
@@ -492,6 +475,7 @@ Partial Class Hotkey_changer
         Me.R_Hotkey.Name = "R_Hotkey"
         Me.R_Hotkey.Size = New System.Drawing.Size(59, 17)
         Me.R_Hotkey.TabIndex = 5
+        Me.R_Hotkey.TabStop = True
         Me.R_Hotkey.Text = "Hotkey"
         Me.R_Hotkey.UseVisualStyleBackColor = True
         Me.R_Hotkey.Visible = False
@@ -537,28 +521,29 @@ Partial Class Hotkey_changer
         Me.Controls.Add(Me.GroupBox1)
         Me.DoubleBuffered = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.KeyPreview = True
         Me.Name = "Hotkey_changer"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Hira's Tree of Savior Hotkey Changer v0.4.0@Hirasu"
-        CType(Me.list_key, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox4.ResumeLayout(False)
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox5.ResumeLayout(False)
-        Me.GroupBox5.PerformLayout()
-        Me.GroupBox6.ResumeLayout(False)
-        Me.Mode_tab.ResumeLayout(False)
-        Me.KeyPage.ResumeLayout(False)
-        Me.MousePage.ResumeLayout(False)
-        CType(Me.list_mouse, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.JoystickPage.ResumeLayout(False)
-        CType(Me.list_joystick, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        Me.Text = "Hira's Tree of Savior Hotkey Changer v0.5 for iTOS@Hirasu | TOSbase.com"
+        CType(Me.list_key,System.ComponentModel.ISupportInitialize).EndInit
+        Me.GroupBox1.ResumeLayout(false)
+        Me.GroupBox2.ResumeLayout(false)
+        Me.GroupBox3.ResumeLayout(false)
+        Me.GroupBox4.ResumeLayout(false)
+        CType(Me.PictureBox1,System.ComponentModel.ISupportInitialize).EndInit
+        Me.GroupBox5.ResumeLayout(false)
+        Me.GroupBox5.PerformLayout
+        Me.GroupBox6.ResumeLayout(false)
+        Me.Mode_tab.ResumeLayout(false)
+        Me.KeyPage.ResumeLayout(false)
+        Me.MousePage.ResumeLayout(false)
+        CType(Me.list_mouse,System.ComponentModel.ISupportInitialize).EndInit
+        Me.JoystickPage.ResumeLayout(false)
+        CType(Me.list_joystick,System.ComponentModel.ISupportInitialize).EndInit
+        Me.ResumeLayout(false)
+        Me.PerformLayout
 
-    End Sub
+End Sub
     Friend WithEvents list_key As System.Windows.Forms.DataGridView
     Friend WithEvents b_save As System.Windows.Forms.Button
     Friend WithEvents change_to As System.Windows.Forms.Button
@@ -588,8 +573,6 @@ Partial Class Hotkey_changer
     Friend WithEvents list_mouse As System.Windows.Forms.DataGridView
     Friend WithEvents mouse_text As System.Windows.Forms.RichTextBox
     Friend WithEvents key_text As System.Windows.Forms.RichTextBox
-    Friend WithEvents load_delay As System.Windows.Forms.Timer
-    Friend WithEvents b_reset_arrow As System.Windows.Forms.Button
     Friend WithEvents b_reset_default As System.Windows.Forms.Button
     Friend WithEvents JoystickPage As System.Windows.Forms.TabPage
     Friend WithEvents list_joystick As System.Windows.Forms.DataGridView

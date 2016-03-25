@@ -7,3 +7,12 @@ c:\users\hirasu\documents\visual studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\
 c:\users\hirasu\documents\visual studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\obj\Release\TOS-Hotkey-Changer@Hirasu.xml
 c:\users\hirasu\documents\visual studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\obj\Release\TOS-Hotkey-Changer@Hirasu.pdb
 C:\Users\Hirasu\Documents\Visual Studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\obj\Release\TOS_Hotkey_Changer_Hirasu.Hotkey_changer.resources
+C:\Users\Mesyrion\Documents\Visual Studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\obj\Release\TOS_Hotkey_Changer_Hirasu.Hotkey_changer.resources
+C:\Users\Mesyrion\Documents\Visual Studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\obj\Release\TOS_Hotkey_Changer_Hirasu.Resources.resources
+C:\Users\Mesyrion\Documents\Visual Studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\obj\Release\TOS-Hotkey-Changer@Hirasu.vbproj.GenerateResource.Cache
+C:\Users\Mesyrion\Documents\Visual Studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\bin\Release\iTOS-Hotkey-Changer@Hirasu.exe
+C:\Users\Mesyrion\Documents\Visual Studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\bin\Release\iTOS-Hotkey-Changer@Hirasu.pdb
+C:\Users\Mesyrion\Documents\Visual Studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\bin\Release\iTOS-Hotkey-Changer@Hirasu.xml
+C:\Users\Mesyrion\Documents\Visual Studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\obj\Release\iTOS-Hotkey-Changer@Hirasu.exe
+C:\Users\Mesyrion\Documents\Visual Studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\obj\Release\iTOS-Hotkey-Changer@Hirasu.xml
+C:\Users\Mesyrion\Documents\Visual Studio 2013\Projects\TOS-Hotkey-Changer@Hirasu\TOS-Hotkey-Changer@Hirasu\obj\Release\iTOS-Hotkey-Changer@Hirasu.pdb

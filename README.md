@@ -2,11 +2,19 @@
 Hotkey changer for Tree of Savior @ Hirasu
 
 reddit: https://redd.it/3qnowr
-Do to list:
 -
-Rename the "Name" column items
+UPDATE 0.5:
+-
+Now iTOS Compatible
+Add "Doubleclick to change" function (CellDoubleClick)
+Fixed the "Conflict" function
+-
 
-Joystick Support coming soon!
+-
+UPDATE v0.4.0:
+-
+-Joystick Support added!
+-
 
 -
 EXAMPLE FOR MOUSE MODE:
@@ -39,20 +47,4 @@ EXAMPLE FOR MOUSE MODE:
 
 -Now you open your Inventory like in Classic Ragnarok Alt+E
 
--
-UDATE v0.3.1:
--
--New layout
 
--Read "Hold to use" from xml
-
--"Hold to use" save fix for Shift and Ctrl
-
--QuickSlot10 re-added
-
--Move Right/left/down/up hotkey added
-
--
-UDATE v0.4.0:
--
--Joystick Support added!

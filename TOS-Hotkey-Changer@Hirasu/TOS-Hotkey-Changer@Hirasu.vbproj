@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>TOS_Hotkey_Changer_Hirasu.My.MyApplication</StartupObject>
     <RootNamespace>TOS_Hotkey_Changer_Hirasu</RootNamespace>
-    <AssemblyName>TOS-Hotkey-Changer%40Hirasu</AssemblyName>
+    <AssemblyName>iTOS-Hotkey-Changer%40Hirasu</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -35,7 +35,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>TOS-Hotkey-Changer%40Hirasu.xml</DocumentationFile>
+    <DocumentationFile>iTOS-Hotkey-Changer%40Hirasu.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -45,7 +45,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>TOS-Hotkey-Changer%40Hirasu.xml</DocumentationFile>
+    <DocumentationFile>iTOS-Hotkey-Changer%40Hirasu.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>

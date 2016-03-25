@@ -3,7 +3,6 @@
 Imports System.Data
 Imports System.IO
 Imports System.Runtime.InteropServices
-
 Public Class Hotkey_changer
     Declare Function joyGetPosEx Lib "winmm.dll" (ByVal uJoyID As Integer, ByRef pji As JOYINFOEX) As Integer
 
@@ -41,6 +40,9 @@ Public Class Hotkey_changer
     Private BCodeCache As New Label
     Private JoyNumber As New Label
     Private POV As New Label
+
+
+    Dim myList As ArrayList
     Private Sub Initialize(sender As Object, e As EventArgs) Handles MyBase.Load
         myjoyEX.dwSize = 64
         myjoyEX.dwFlags = &HFF
@@ -48,6 +50,7 @@ Public Class Hotkey_changer
         list_key.RowHeadersVisible = False
         list_mouse.RowHeadersVisible = False
         list_joystick.RowHeadersVisible = False
+        _list = list_key
     End Sub
 
     Private Sub resize_default()
@@ -62,14 +65,29 @@ Public Class Hotkey_changer
     End Sub
 
     Private Sub check_mode()
-        If mode = "0" Then
+        If mode = 0 Then
             _list = list_key
-        ElseIf mode = "1" Then
+        ElseIf mode = 1 Then
             _list = list_mouse
-        ElseIf mode = "2" Then
+        ElseIf mode = 2 Then
             _list = list_joystick
         End If
     End Sub
+    Private Sub Stop_Edit()
+        _change = 0
+        changinginfo.Text = "Choose a hotkey..."
+    End Sub
+    Private Sub Start_Edit()
+        check_mode()
+        If _list.CurrentRow.Index = 0 Then
+            changinginfo.Text = "Cant change!"
+        Else
+            _change = 1
+            changinginfo.Text = "Press a button..."
+        End If
+    End Sub
+    
+
     Private Sub check_hold_keys()
 
         If _list.Rows(_list.CurrentRow.Index).Cells(5).Value = "YES" Then
@@ -90,6 +108,22 @@ Public Class Hotkey_changer
             CheckCTRL.CheckState = False
         End If
     End Sub
+
+    Private Sub Check_ChatFix()
+        Dim Max_Row As Integer
+        Max_Row = _list.Rows.Count
+        For i As Integer = 0 To Max_Row - 1 Step +1
+            If _list.Rows(i).Cells(0).Value = "ChatType" Then
+                If _list.Rows(i).Cells(4).Value = "TAB" Then
+                    chat_fix.Text = "Fix Chat Type"
+                Else
+                    chat_fix.Text = "Remove Fix"
+                End If
+            End If
+            
+        Next
+    End Sub
+
     Private Function Loading(ByVal _default As Integer) As Integer
         Dim xmlFile As XmlReader
         If _default < 1 Then
@@ -114,29 +148,15 @@ Public Class Hotkey_changer
         list_key.Columns(6).Visible = False
         list_key.Columns(7).Visible = False
         list_key.Columns(8).Visible = False
-        list_key.Rows(103).Visible = False
-        list_key.Rows(101).Visible = False
-        list_key.Rows(100).Visible = False
-        list_key.Rows(99).Visible = False
-        list_key.Rows(98).Visible = False
-        'list_key.Rows(83).Visible = False
-        'list_key.Rows(82).Visible = False
-        'list_key.Rows(81).Visible = False
-        'list_key.Rows(80).Visible = False
-        'list_key.Rows(59).Visible = False
-        list_key.Rows(29).Visible = False
-        list_key.Rows(19).Visible = False
-        list_key.Rows(18).Visible = False
-        list_key.Rows(17).Visible = False
-        list_key.Rows(16).Visible = False
-        list_key.Rows(1).Visible = False
-        If list_key.Rows(105).Cells(4).Value = "" Then
-            chat_fix.Text = "Remove Fix"
-        End If
-        Dim column As DataGridViewColumn = list_key.Columns(0)
-        column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-        Dim column2 As DataGridViewColumn = list_key.Columns(4)
-        column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        list_key.Columns(9).Visible = False
+
+
+
+        Check_ChatFix()
+        Dim columnName As DataGridViewColumn = list_key.Columns(0)
+        columnName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        Dim columnHotkey As DataGridViewColumn = list_key.Columns(4)
+        columnHotkey.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         Return False
 
         xmlFile.Close()
@@ -146,15 +166,15 @@ Public Class Hotkey_changer
 
 
     Private Function Loading_mouse(ByVal _default As Integer) As Integer
-        Dim xmlFile As XmlReader
+        Dim xmlFile_mouse As XmlReader
         If _default < 1 Then
-            xmlFile = XmlReader.Create("hotkey_mousemode.xml", New XmlReaderSettings())
+            xmlFile_mouse = XmlReader.Create("hotkey_mousemode.xml", New XmlReaderSettings())
         Else
-            xmlFile = XmlReader.Create("hotkey_mousemode_default.xml", New XmlReaderSettings())
+            xmlFile_mouse = XmlReader.Create("hotkey_mousemode_default.xml", New XmlReaderSettings())
         End If
         Dim ds_mouse As New DataSet
-        ds_mouse.ReadXml(xmlFile)
-        xmlFile.Close()
+        ds_mouse.ReadXml(xmlFile_mouse)
+        xmlFile_mouse.Close()
         list_mouse.DataSource = ds_mouse.Tables(0)
         list_mouse.Columns("ID").ReadOnly = True
         list_mouse.Columns("ID").HeaderText = "Name"
@@ -167,23 +187,15 @@ Public Class Hotkey_changer
         list_mouse.Columns(6).Visible = False
         list_mouse.Columns(7).Visible = False
         list_mouse.Columns(8).Visible = False
-        'list_mouse.Rows(19).Visible = False
-        list_mouse.Rows(97).Visible = False
-        list_mouse.Rows(95).Visible = False
-        list_mouse.Rows(94).Visible = False
-        list_mouse.Rows(93).Visible = False
-        list_mouse.Rows(19).Visible = False
-        list_mouse.Rows(18).Visible = False
-        list_mouse.Rows(17).Visible = False
-        list_mouse.Rows(16).Visible = False
-        list_mouse.Rows(1).Visible = False
+        list_mouse.Columns(9).Visible = False
+
         If list_mouse.Rows(99).Cells(4).Value = "" Then
             chat_fix.Text = "Remove Fix"
         End If
-        Dim column As DataGridViewColumn = list_mouse.Columns(0)
-        column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-        Dim column2 As DataGridViewColumn = list_mouse.Columns(4)
-        column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        Dim columnName As DataGridViewColumn = list_mouse.Columns(0)
+        columnName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        Dim columnHotkey As DataGridViewColumn = list_mouse.Columns(4)
+        columnHotkey.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         Return False
     End Function
 
@@ -209,58 +221,65 @@ Public Class Hotkey_changer
         list_joystick.Columns(7).Visible = False
         list_joystick.Columns(8).Visible = False
         list_joystick.Columns(9).Visible = False
+        list_joystick.Columns(10).Visible = False
+        list_joystick.Columns(11).Visible = False
 
-        list_joystick.Rows(3).Visible = False
-        list_joystick.Rows(2).Visible = False
-        list_joystick.Rows(1).Visible = False
-
-        'If list_joystick.Rows(99).Cells(4).Value = "" Then
-        'chat_fix.Text = "Remove Fix"
-        'End If
-        Dim column As DataGridViewColumn = list_joystick.Columns(0)
-        column.Width = 150
-        Dim column2 As DataGridViewColumn = list_joystick.Columns(4)
-        column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-        Dim column3 As DataGridViewColumn = list_joystick.Columns(5)
-        column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        Dim columnName As DataGridViewColumn = list_joystick.Columns(0)
+        columnName.Width = 150
+        Dim columnHotkey As DataGridViewColumn = list_joystick.Columns(4)
+        columnHotkey.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        Dim columnPressedKey As DataGridViewColumn = list_joystick.Columns(5)
+        columnPressedKey.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         Return False
     End Function
     Private Function conflict_check(ByVal _key As String) As String
         check_mode()
-        If mode = "2" Then
+        If mode = 2 Then
             If _list.Rows(_list.CurrentRow.Index).Cells(curColumn).Value = _key Then
+                Stop_Edit()
             Else
-
+                Stop_Edit()
+                Dim Conflict_List As New ArrayList
                 Dim Max_Row As Integer
                 Max_Row = _list.Rows.Count
                 For i As Integer = 0 To Max_Row - 1 Step +1
                     If _list.Rows(i).Cells(curColumn).Value = _key Then
-                        _change = "0"
-                        changinginfo.Text = "Choose a hotkey..."
 
-                        Select Case MessageBox.Show(Me, "Conflict with '" & _list.Rows(i).Cells(0).Value & "' , continue?", "CONFLICT!", MessageBoxButtons.YesNo)
-                            Case DialogResult.No : Return False
-                            Case DialogResult.Yes
-                        End Select
+                        Conflict_List.Add(_list.Rows(i).Cells(0).Value)
+
+
                     End If
                 Next
+                If Conflict_List.Count > 0 Then
+                    Dim Conflict_Message = String.Join(Environment.NewLine, Conflict_List.ToArray())
+                    Select Case MessageBox.Show(Me, "Conflict with:" & vbCrLf & vbCrLf & Conflict_Message & vbCrLf & vbCrLf & "Continue?", "CONFLICT!", MessageBoxButtons.YesNo)
+                        Case DialogResult.No : Return False
+                        Case DialogResult.Yes
+                    End Select
+                End If
 
                 _list.Rows(_list.CurrentRow.Index).Cells(curColumn).Value = _key
+
             End If
         Else
             If _list.Rows(_list.CurrentRow.Index).Cells(4).Value = _key Then
             Else
 
+                Dim Conflict_List As New ArrayList
                 Dim Max_Row As Integer
                 Max_Row = _list.Rows.Count
                 For i As Integer = 0 To Max_Row - 1 Step +1
-                    If _list.Rows(i).Cells(4).Value = _key Then
-                        Select Case MessageBox.Show(Me, "Conflict with '" & _list.Rows(i).Cells(0).Value & "' , continue?", "CONFLICT!", MessageBoxButtons.YesNo)
-                            Case DialogResult.No : Return False
-                            Case DialogResult.Yes
-                        End Select
+                    If _list.Rows(i).Cells(curColumn).Value = _key Then
+                        Conflict_List.Add(_list.Rows(i).Cells(0).Value.ToString)
                     End If
                 Next
+                If Conflict_List IsNot Nothing Then
+                    Dim Conflict_Message = String.Join(Environment.NewLine, Conflict_List.ToArray())
+                    Select Case MessageBox.Show(Me, "Conflict with:" & vbCrLf & vbCrLf & Conflict_Message & vbCrLf & vbCrLf & "Continue?", "CONFLICT!", MessageBoxButtons.YesNo)
+                        Case DialogResult.No : Return False
+                        Case DialogResult.Yes
+                    End Select
+                End If
 
                 _list.Rows(_list.CurrentRow.Index).Cells(4).Value = _key
             End If
@@ -270,98 +289,25 @@ Public Class Hotkey_changer
         Return True
     End Function
 
-    Private Sub Form1_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles change_to.KeyDown
-        'MessageBox.Show(e.KeyCode)
-        If Not mode = "2" Then
 
-
-            If _change = "1" Then
-
-                If e.KeyCode = Keys.F1 Then
-                    conflict_check("F1")
-                ElseIf e.KeyCode = Keys.F2 Then
-                    conflict_check("F2")
-                ElseIf e.KeyCode = Keys.F3 Then
-                    conflict_check("F3")
-                ElseIf e.KeyCode = Keys.F4 Then
-                    conflict_check("F4")
-                ElseIf e.KeyCode = Keys.F5 Then
-                    conflict_check("F5")
-                ElseIf e.KeyCode = Keys.F6 Then
-                    conflict_check("F6")
-                ElseIf e.KeyCode = Keys.F7 Then
-                    conflict_check("F7")
-                ElseIf e.KeyCode = Keys.F8 Then
-                    conflict_check("F8")
-                ElseIf e.KeyCode = Keys.F9 Then
-                    conflict_check("F9")
-                ElseIf e.KeyCode = Keys.F10 Then
-                    conflict_check("F10")
-                ElseIf e.KeyCode = Keys.F11 Then
-                    conflict_check("F11")
-                ElseIf e.KeyCode = Keys.F12 Then
-                    conflict_check("F12")
-                ElseIf e.KeyCode = Keys.NumPad0 Then
-                    conflict_check("NUMPAD0")
-                ElseIf e.KeyCode = Keys.NumPad1 Then
-                    conflict_check("NUMPAD1")
-                ElseIf e.KeyCode = Keys.NumPad2 Then
-                    conflict_check("NUMPAD2")
-                ElseIf e.KeyCode = Keys.NumPad3 Then
-                    conflict_check("NUMPAD3")
-                ElseIf e.KeyCode = Keys.NumPad4 Then
-                    conflict_check("NUMPAD4")
-                ElseIf e.KeyCode = Keys.NumPad5 Then
-                    conflict_check("NUMPAD5")
-                ElseIf e.KeyCode = Keys.NumPad6 Then
-                    conflict_check("NUMPAD6")
-                ElseIf e.KeyCode = Keys.NumPad7 Then
-                    conflict_check("NUMPAD7")
-                ElseIf e.KeyCode = Keys.NumPad8 Then
-                    conflict_check("NUMPAD8")
-                ElseIf e.KeyCode = Keys.NumPad9 Then
-                    conflict_check("NUMPAD9")
-                ElseIf e.KeyCode = Keys.Back Then
-                    conflict_check("BACKSPACE")
-                ElseIf e.KeyCode = Keys.PageUp Then
-                    conflict_check("UP")
-                ElseIf e.KeyCode = Keys.PageDown Then
-                    conflict_check("DOWN")
-                ElseIf e.KeyCode = Keys.Insert Then
-                    conflict_check("INSERT")
-                ElseIf e.KeyCode = Keys.Space Then
-                    conflict_check("SPACE")
-                ElseIf e.KeyCode = "188" Then
-                    conflict_check(";")
-                ElseIf e.KeyCode = Keys.Enter Then
-                Else
-                    conflict_check(Convert.ToChar(e.KeyCode))
-                End If
-
-
-                _change = "0"
-                changinginfo.Text = "Choose a hotkey..."
-            End If
-        End If
-    End Sub
 
 
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles b_save.Click
         check_mode()
-        If mode = "0" Then
+        If mode = 0 Then
             Select Case MessageBox.Show(Me, "Are you sure?", "Saving", MessageBoxButtons.YesNo)
                 Case DialogResult.No : Return
                 Case DialogResult.Yes : list_key.DataSource.WriteXml(_Datafile_key.FullName)
                     MsgBox("Saved")           ' 
             End Select
-        ElseIf mode = "1" Then
+        ElseIf mode = 1 Then
             Select Case MessageBox.Show(Me, "Are you sure?", "Saving", MessageBoxButtons.YesNo)
                 Case DialogResult.No : Return
                 Case DialogResult.Yes : list_mouse.DataSource.WriteXml(_Datafile_mouse.FullName)
                     MsgBox("Saved")
             End Select
-        ElseIf mode = "2" Then
+        ElseIf mode = 2 Then
             Select Case MessageBox.Show(Me, "Are you sure?", "Saving", MessageBoxButtons.YesNo)
                 Case DialogResult.No : Return
                 Case DialogResult.Yes : list_joystick.DataSource.WriteXml(_Datafile_joystick.FullName)
@@ -381,58 +327,41 @@ Public Class Hotkey_changer
         End Select
     End Sub
 
-    'Private Sub StwagList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles list_joystick.CellClick
-    'MessageBox.Show(list_joystick.CurrentRow.Index)
-
-    'End Sub
-
 
     Private Sub changeto(sender As Object, e As EventArgs) Handles change_to.Click
-        check_mode()
-        If _list.CurrentRow.Index = 0 Then
-            changinginfo.Text = "Cant change!"
-        Else
-
-            _change = "1"
-            changinginfo.Text = "Press a button..."
-        End If
+        Start_Edit()
     End Sub
 
     Private Sub Keyboard_reload(sender As Object, e As EventArgs) Handles b_reload_k.Click
-        If can_load = "0" Then
+        If _list Is list_key Then
 
 
             key_text.Visible = False
-            can_load = "1"
-            load_delay.Enabled = True
             Dim curFile As String = _Datafile_key.FullName
 
             If File.Exists(curFile) Then
                 Loading(0)
-                mode = "0"
+                mode = 0
             Else
                 MessageBox.Show("Can't find 'hotkey.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
                 Me.Close()
             End If
-            If list_key.Rows.Count > 1 Then
+            If list_key.Rows.Count > 1 And _list Is list_key Then
                 change_to.Enabled = True
                 change_tab.Enabled = True
                 change_enter.Enabled = True
                 b_clear.Enabled = True
                 chat_fix.Enabled = True
                 b_save.Enabled = True
-                b_reset_arrow.Enabled = True
                 b_reset_default.Enabled = True
             End If
         End If
     End Sub
 
     Private Sub Mouse_reload(sender As Object, e As EventArgs) Handles b_reload_mouse.Click
-        If can_load = "0" Then
+        If _list Is list_mouse Then
 
             mouse_text.Visible = False
-            can_load = "1"
-            load_delay.Enabled = True
             Dim curFile_mouse As String = _Datafile_mouse.FullName
 
             If File.Exists(curFile_mouse) Then
@@ -442,25 +371,22 @@ Public Class Hotkey_changer
                 MessageBox.Show("Can't find 'hotkey_mousemode.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
                 Me.Close()
             End If
-            If list_mouse.Rows.Count > 1 Then
+            If list_mouse.Rows.Count > 1 And _list Is list_mouse Then
                 change_to.Enabled = True
                 change_tab.Enabled = True
                 change_enter.Enabled = True
                 b_clear.Enabled = True
                 chat_fix.Enabled = True
                 b_save.Enabled = True
-                b_reset_arrow.Enabled = True
                 b_reset_default.Enabled = True
             End If
         End If
     End Sub
 
     Private Sub Joystick_reload(sender As Object, e As EventArgs) Handles b_reload_joystick.Click
-        If can_load = "0" Then
+        If _list Is list_joystick Then
 
             joystick_text.Visible = False
-            can_load = "1"
-            load_delay.Enabled = True
             Dim curFile_joystick As String = _Datafile_joystick.FullName
 
             If File.Exists(curFile_joystick) Then
@@ -470,7 +396,9 @@ Public Class Hotkey_changer
                 MessageBox.Show("Can't find 'hotkey_joystick.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
                 Me.Close()
             End If
-            If list_joystick.Rows.Count > 1 Then
+            If list_joystick.Rows.Count > 1 And _list Is list_joystick Then
+                change_tab.Enabled = True
+                change_enter.Enabled = True
                 change_to.Enabled = True
                 b_clear.Enabled = True
                 chat_fix.Enabled = True
@@ -481,7 +409,9 @@ Public Class Hotkey_changer
     End Sub
 
     Private Sub changetab(sender As Object, e As EventArgs) Handles change_tab.Click
+        If _change = 0 Then
 
+        End If
         conflict_check("TAB")
     End Sub
 
@@ -491,37 +421,53 @@ Public Class Hotkey_changer
 
     Private Sub chatfix(sender As Object, e As EventArgs) Handles chat_fix.Click
         check_mode()
-        If mode = "0" Then
-            If _list.Rows(105).Cells(4).Value = "TAB" Then
-                _list.Rows(105).Cells(4).Value = ""
-                MessageBox.Show("Fixed!")
-                chat_fix.Text = "Remove Fix"
-            Else
-                _list.Rows(105).Cells(4).Value = "TAB"
-                MessageBox.Show("Removed!")
-                chat_fix.Text = "Fix Chat Type"
-            End If
+        If mode = 0 Then
+            Dim Max_Row As Integer
+            Max_Row = _list.Rows.Count
+            For i As Integer = 0 To Max_Row - 1 Step +1
+                If _list.Rows(i).Cells(0).Value = "ChatType" Then
+                    If _list.Rows(i).Cells(4).Value = "TAB" Then
+                        _list.Rows(i).Cells(4).Value = ""
+                    Else
+                        _list.Rows(i).Cells(4).Value = "TAB"
+                    End If
+                End If
+                If _list.Rows(i).Cells(0).Value = "ChatFrameType" Then
+                    If _list.Rows(i).Cells(4).Value = "TAB" Then
+                        _list.Rows(i).Cells(4).Value = ""
+                    Else
+                        _list.Rows(i).Cells(4).Value = "TAB"
+                    End If
+                End If
+                If _list.Rows(i).Cells(0).Value = "ChatFrameType2" Then
+                    If _list.Rows(i).Cells(4).Value = "TAB" Then
+                        _list.Rows(i).Cells(4).Value = ""
+                        MessageBox.Show("Fixed!")
+                        chat_fix.Text = "Remove Fix"
+                    Else
+                        _list.Rows(i).Cells(4).Value = "TAB"
+                        MessageBox.Show("Removed!")
+                        chat_fix.Text = "Fix Chat Type"
+                    End If
+                End If
+            Next
 
-        ElseIf mode = "1" Then
-            If _list.Rows(99).Cells(4).Value = "TAB" Then
-                _list.Rows(99).Cells(4).Value = ""
-                MessageBox.Show("Fixed!")
-                chat_fix.Text = "Remove Fix"
-            Else
-                _list.Rows(99).Cells(4).Value = "TAB"
-                MessageBox.Show("Removed!")
-                chat_fix.Text = "Fix Chat Type"
-            End If
-        ElseIf mode = "2" Then
-            If _list.Rows(99).Cells(4).Value = "TAB" Then
-                _list.Rows(99).Cells(4).Value = ""
-                MessageBox.Show("Fixed!")
-                chat_fix.Text = "Remove Fix"
-            Else
-                _list.Rows(99).Cells(4).Value = "TAB"
-                MessageBox.Show("Removed!")
-                chat_fix.Text = "Fix Chat Type"
-            End If
+        Else
+            Dim Max_Row As Integer
+            Max_Row = _list.Rows.Count
+            For i As Integer = 0 To Max_Row - 1 Step +1
+                If _list.Rows(i).Cells(0).Value = "ChatType" Then
+                    If _list.Rows(i).Cells(4).Value = "TAB" Then
+                        _list.Rows(i).Cells(4).Value = ""
+                        MessageBox.Show("Fixed!")
+                        chat_fix.Text = "Remove Fix"
+                    Else
+                        _list.Rows(i).Cells(4).Value = "TAB"
+                        MessageBox.Show("Removed!")
+                        chat_fix.Text = "Fix Chat Type"
+                    End If
+                End If
+            Next
         End If
 
     End Sub
@@ -531,7 +477,7 @@ Public Class Hotkey_changer
     Private Sub b_clear_Click(sender As Object, e As EventArgs) Handles b_clear.Click
         check_mode()
         _list.Rows(_list.CurrentRow.Index).Cells(4).Value = ""
-        If mode = "2" Then
+        If mode = 2 Then
             _list.Rows(_list.CurrentRow.Index).Cells(5).Value = ""
         End If
     End Sub
@@ -539,16 +485,41 @@ Public Class Hotkey_changer
     Private Sub oncellclick(sender As Object, e As EventArgs) Handles list_key.CellClick
         check_mode()
         check_hold_keys()
+        Stop_Edit()
     End Sub
     Private Sub oncellclick_mouse(sender As Object, e As EventArgs) Handles list_mouse.CellClick
         check_mode()
         check_hold_keys()
+        Stop_Edit()
+    End Sub
+
+    Private Sub oncellclick_joystick(sender As Object, e As EventArgs) Handles list_joystick.CellClick
+        If list_joystick.CurrentCell.ColumnIndex = 4 Then
+            R_Hotkey.Checked = True
+            R_Pressedkey.Checked = False
+        Else
+            R_Pressedkey.Checked = True
+            R_Hotkey.Checked = False
+        End If
+
+        Stop_Edit()
+    End Sub
+    Private Sub oncelldoubleclick(sender As Object, e As EventArgs) Handles list_key.CellMouseDoubleClick
+        Start_Edit()
+    End Sub
+    Private Sub oncelldoubleclick_mouse(sender As Object, e As EventArgs) Handles list_mouse.CellMouseDoubleClick
+        Start_Edit()
+    End Sub
+    Private Sub oncelldoubleclick_joystick(sender As Object, e As EventArgs) Handles list_joystick.CellMouseDoubleClick
+
+        Start_Edit()
     End Sub
 
     Private Sub Page_key_Click(sender As Object, e As EventArgs) Handles KeyPage.Enter
-        mode = "0"
+        mode = 0
         check_mode()
         resize_default()
+        Check_ChatFix()
         Joystick_checker.Stop()
         JoyInfoBox.Visible = False
         CheckALT.Enabled = True
@@ -563,7 +534,7 @@ Public Class Hotkey_changer
             b_clear.Enabled = True
             chat_fix.Enabled = True
             b_save.Enabled = True
-            b_reset_arrow.Enabled = True
+
             b_reset_default.Enabled = True
         Else
 
@@ -573,15 +544,16 @@ Public Class Hotkey_changer
             b_clear.Enabled = False
             chat_fix.Enabled = False
             b_save.Enabled = False
-            b_reset_arrow.Enabled = False
+
             b_reset_default.Enabled = False
         End If
     End Sub
 
     Private Sub Page_mouse_Click(sender As Object, e As EventArgs) Handles MousePage.Enter
-        mode = "1"
+        mode = 1
         check_mode()
         resize_default()
+        Check_ChatFix()
         Joystick_checker.Stop()
         JoyInfoBox.Visible = False
         CheckALT.Enabled = True
@@ -596,7 +568,7 @@ Public Class Hotkey_changer
             b_clear.Enabled = True
             chat_fix.Enabled = True
             b_save.Enabled = True
-            b_reset_arrow.Enabled = True
+
             b_reset_default.Enabled = True
         Else
 
@@ -606,15 +578,16 @@ Public Class Hotkey_changer
             b_clear.Enabled = False
             chat_fix.Enabled = False
             b_save.Enabled = False
-            b_reset_arrow.Enabled = False
+
             b_reset_default.Enabled = False
         End If
 
     End Sub
     Private Sub Page_Joystick_Click(sender As Object, e As EventArgs) Handles JoystickPage.Enter
-        mode = "2"
+        mode = 2
         check_mode()
         resize_joystick()
+        Check_ChatFix()
         JoyInfoBox.Visible = True
         Joystick_checker.Interval = 17
         Joystick_checker.Start()
@@ -629,10 +602,10 @@ Public Class Hotkey_changer
             chat_fix.Enabled = True
             b_save.Enabled = True
             b_reset_default.Enabled = True
-            change_tab.Enabled = False
-            change_enter.Enabled = False
+            change_tab.Enabled = True
+            change_enter.Enabled = True
             b_clear.Enabled = True
-            b_reset_arrow.Enabled = False
+
         Else
 
             change_to.Enabled = False
@@ -641,31 +614,15 @@ Public Class Hotkey_changer
             b_clear.Enabled = False
             chat_fix.Enabled = False
             b_save.Enabled = False
-            b_reset_arrow.Enabled = False
+
             b_reset_default.Enabled = False
         End If
 
     End Sub
 
 
-    Private Sub load_delay_Tick(sender As Object, e As EventArgs) Handles load_delay.Tick
-        can_load = "0"
-        load_delay.Enabled = False
-    End Sub
 
-    Private Sub b_reset_arrow_Click(sender As Object, e As EventArgs) Handles b_reset_arrow.Click
-        If mode = "0" Then
-            _list.Rows(83).Cells(4).Value = "RIGHT"
-            _list.Rows(82).Cells(4).Value = "LEFT"
-            _list.Rows(81).Cells(4).Value = "DOWN"
-            _list.Rows(80).Cells(4).Value = "UP"
-        ElseIf mode = "1" Then
-            _list.Rows(82).Cells(4).Value = "RIGHT"
-            _list.Rows(81).Cells(4).Value = "LEFT"
-            _list.Rows(80).Cells(4).Value = "DOWN"
-            _list.Rows(79).Cells(4).Value = "UP"
-        End If
-    End Sub
+
     Private Sub update_hold()
         If CheckSHIFT.Checked = True Then
             _list.Rows(_list.CurrentRow.Index).Cells(5).Value = "YES"
@@ -699,7 +656,7 @@ Public Class Hotkey_changer
         Select Case MessageBox.Show(Me, "Are you sure?", "Reset to default", MessageBoxButtons.YesNo)
             Case DialogResult.No : Return
             Case DialogResult.Yes
-                If mode = "0" Then
+                If mode = 0 Then
                     Dim curFile As String = _Datafile_default_key.FullName
 
                     If File.Exists(curFile) Then
@@ -709,7 +666,7 @@ Public Class Hotkey_changer
                         Me.Close()
                     End If
 
-                ElseIf mode = "1" Then
+                ElseIf mode = 1 Then
                     Dim curFile_mouse As String = _Datafile_default_mouse.FullName
 
                     If File.Exists(curFile_mouse) Then
@@ -718,7 +675,7 @@ Public Class Hotkey_changer
                         MessageBox.Show("Can't find 'hotkey_mousemode.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
                         Me.Close()
                     End If
-                ElseIf mode = "2" Then
+                ElseIf mode = 2 Then
                     Dim curFile_joystick As String = _Datafile_default_joystick.FullName
 
                     If File.Exists(curFile_joystick) Then
@@ -731,22 +688,17 @@ Public Class Hotkey_changer
         End Select
     End Sub
 
-
-    Private Sub RichTextBox3_TextChanged(sender As Object, e As EventArgs) Handles JoyInfoBox.TextChanged
-
-    End Sub
-
     Private Sub Joystick_checker_Tick(sender As Object, e As EventArgs) Handles Joystick_checker.Tick
-        If _change = "1" Then
+        If _change = 1 Then
 
 
-            ' Get the joystick information
+
             Call joyGetPosEx(0, myjoyEX)
 
-            With myjoyEX
-                BCodeCache.Text = .dwButtons.ToString("X")  'Print in Hex, so can see the individual bits associated with the buttons
-                JoyNumber.Text = .dwButtonNumber.ToString  'number of buttons pressed at the same time
-                POV.Text = (.dwPOV / 100).ToString     'POV hat (in 1/100ths of degrees, so divided by 100 to give degrees)
+            With myjoyEX 'Source https://social.msdn.microsoft.com/Forums/vstudio/en-US/af28b35b-d756-4d87-94c6-ced882ab20a5/reading-input-data-from-joystick-in-visual-basic?forum=vbgeneral
+                BCodeCache.Text = .dwButtons.ToString("X")
+                JoyNumber.Text = .dwButtonNumber.ToString
+                POV.Text = (.dwPOV / 100).ToString
 
                 If .dwZpos >= 34000 Then
                     'LKeyPressed.Text = "LT"
@@ -828,8 +780,77 @@ Public Class Hotkey_changer
         End If
     End Sub
 
-    Private Sub change_to_Leave(sender As Object, e As EventArgs) Handles change_to.Leave
-        _change = "0"
-        changinginfo.Text = "Choose a hotkey..."
+    Private Sub Hotkeychanger_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
+        If Not mode = 2 Then
+            If _change = 1 Then
+                If e.KeyCode = Keys.F1 Then
+                    conflict_check("F1")
+                ElseIf e.KeyCode = Keys.F2 Then
+                    conflict_check("F2")
+                ElseIf e.KeyCode = Keys.F3 Then
+                    conflict_check("F3")
+                ElseIf e.KeyCode = Keys.F4 Then
+                    conflict_check("F4")
+                ElseIf e.KeyCode = Keys.F5 Then
+                    conflict_check("F5")
+                ElseIf e.KeyCode = Keys.F6 Then
+                    conflict_check("F6")
+                ElseIf e.KeyCode = Keys.F7 Then
+                    conflict_check("F7")
+                ElseIf e.KeyCode = Keys.F8 Then
+                    conflict_check("F8")
+                ElseIf e.KeyCode = Keys.F9 Then
+                    conflict_check("F9")
+                ElseIf e.KeyCode = Keys.F10 Then
+                    conflict_check("F10")
+                ElseIf e.KeyCode = Keys.F11 Then
+                    conflict_check("F11")
+                ElseIf e.KeyCode = Keys.F12 Then
+                    conflict_check("F12")
+                ElseIf e.KeyCode = Keys.NumPad0 Then
+                    conflict_check("NUMPAD0")
+                ElseIf e.KeyCode = Keys.NumPad1 Then
+                    conflict_check("NUMPAD1")
+                ElseIf e.KeyCode = Keys.NumPad2 Then
+                    conflict_check("NUMPAD2")
+                ElseIf e.KeyCode = Keys.NumPad3 Then
+                    conflict_check("NUMPAD3")
+                ElseIf e.KeyCode = Keys.NumPad4 Then
+                    conflict_check("NUMPAD4")
+                ElseIf e.KeyCode = Keys.NumPad5 Then
+                    conflict_check("NUMPAD5")
+                ElseIf e.KeyCode = Keys.NumPad6 Then
+                    conflict_check("NUMPAD6")
+                ElseIf e.KeyCode = Keys.NumPad7 Then
+                    conflict_check("NUMPAD7")
+                ElseIf e.KeyCode = Keys.NumPad8 Then
+                    conflict_check("NUMPAD8")
+                ElseIf e.KeyCode = Keys.NumPad9 Then
+                    conflict_check("NUMPAD9")
+                ElseIf e.KeyCode = Keys.Back Then
+                    conflict_check("BACKSPACE")
+                ElseIf e.KeyCode = Keys.Up Then
+                    conflict_check("UP")
+                ElseIf e.KeyCode = Keys.Down Then
+                    conflict_check("DOWN")
+                ElseIf e.KeyCode = Keys.Left Then
+                    conflict_check("LEFT")
+                ElseIf e.KeyCode = Keys.Down Then
+                    conflict_check("DOWN")
+                ElseIf e.KeyCode = Keys.Insert Then
+                    conflict_check("INSERT")
+                ElseIf e.KeyCode = Keys.Space Then
+                    conflict_check("SPACE")
+                ElseIf e.KeyCode = "188" Then
+                    conflict_check(";")
+                ElseIf e.KeyCode = Keys.Enter Then
+                Else
+                    conflict_check(Convert.ToChar(e.KeyCode))
+                End If
+                Stop_Edit()
+            End If
+        End If
     End Sub
+
+
 End Class
