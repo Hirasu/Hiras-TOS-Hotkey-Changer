@@ -4,17 +4,20 @@ Hotkey changer for Tree of Savior @ Hirasu
 reddit: https://redd.it/3qnowr
 -
 UPDATE 0.5:
-
-Now iTOS Compatible
-Add "Doubleclick to change" function (CellDoubleClick)
-Fixed the "Conflict" function
 -
+
+-Now iTOS Compatible
+
+-Add "Doubleclick to change" function (CellDoubleClick)
+
+-Fixed the "Conflict" function
+
 
 -
 UPDATE v0.4.0:
-
--Joystick Support added!
 -
+-Joystick Support added!
+
 
 -
 EXAMPLE FOR MOUSE MODE:
