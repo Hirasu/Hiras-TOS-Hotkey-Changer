@@ -1,10 +1,9 @@
 # Hiras-TOS-Hotkey-Changer
-Hotkey changer for Tree of Savior @ Hirasu
 -
 reddit: https://redd.it/3qnowr
-
+-
 TOSbase: http://forum.tosbase.com/viewtopic.php?f=9&t=1668
-
+-
 
 -
 UPDATE 0.5:
