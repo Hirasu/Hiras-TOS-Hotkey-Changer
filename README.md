@@ -26,11 +26,11 @@ EXAMPLE FOR MOUSE MODE:
 
 -Scroll down and click on "Map"
 
--Hit the "Change to TAB" button 
+-Click the "Change to TAB" button 
 
 -Scroll down to "Normal/Attack"
 
--Hit the "change to..." button and press "E"
+-Click the "change to..." Button (or doubleclick on the Cell) and press "E"
 
 -Save it!
 
@@ -44,7 +44,7 @@ EXAMPLE FOR MOUSE MODE:
 
 -Check the "Hold ALT" box
 
--Click on the "change to..." button and press "E"
+-Click the "change to..." Button (or doubleclick on the Cell) and press "E"
 
 -Save it!
 
