@@ -1,4 +1,0 @@
-<?xml version="1.0" standalone="yes"?>
-<Category>
-  <HotKey ID="Chat" Name="채팅" DownScp="ui.ProcessReturnKey()" UpScp="None" Key="ENTER" UseShift="NO" UseAlt="NO" UseCtrl="NO" OnEdit="YES" Category="Basic" />
-</Category>
