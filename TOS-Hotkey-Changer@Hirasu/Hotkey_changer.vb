@@ -27,10 +27,16 @@ Public Class Hotkey_changer
     Dim myjoyEX As JOYINFOEX
     Private _Datafile_key As New FileInfo(Application.StartupPath & "\hotkey.xml")
     Private _Datafile_mouse As New FileInfo(Application.StartupPath & "\hotkey_mousemode.xml")
-    Private _Datafile_joystick As New FileInfo(Application.StartupPath & "\hotkey_joystick.xml")
+	Private _Datafile_joystick As New FileInfo(Application.StartupPath & "\hotkey_joystick.xml")
+	Private _Datafile_key_User As New FileInfo(Application.StartupPath & "\hotkey_user.xml")
+	Private _Datafile_mouse_User As New FileInfo(Application.StartupPath & "\hotkey_mousemode_user.xml")
+	Private _Datafile_joystick_User As New FileInfo(Application.StartupPath & "\hotkey_joystick_user.xml")
     Private _Datafile_default_key As New FileInfo(Application.StartupPath & "\hotkey_default.xml")
     Private _Datafile_default_mouse As New FileInfo(Application.StartupPath & "\hotkey_mousemode_default.xml")
     Private _Datafile_default_joystick As New FileInfo(Application.StartupPath & "\hotkey_joystick_default.xml")
+	Private _CurDataFile_Key As String
+	Private _CurDataFile_Mouse As String
+	Private _CurDataFile_Joystick As String
 
     Private mode As Integer
     Private _change As New Integer
@@ -127,9 +133,9 @@ Public Class Hotkey_changer
     Private Function Loading(ByVal _default As Integer) As Integer
         Dim xmlFile As XmlReader
         If _default < 1 Then
-            xmlFile = XmlReader.Create("hotkey.xml", New XmlReaderSettings())
+			xmlFile = XmlReader.Create(_CurDataFile_Key, New XmlReaderSettings())
         Else
-            xmlFile = XmlReader.Create("hotkey_default.xml", New XmlReaderSettings())
+			xmlFile = XmlReader.Create(_Datafile_default_key.FullName, New XmlReaderSettings())
         End If
 
         Dim ds As New DataSet
@@ -168,9 +174,9 @@ Public Class Hotkey_changer
     Private Function Loading_mouse(ByVal _default As Integer) As Integer
         Dim xmlFile_mouse As XmlReader
         If _default < 1 Then
-            xmlFile_mouse = XmlReader.Create("hotkey_mousemode.xml", New XmlReaderSettings())
+			xmlFile_mouse = XmlReader.Create(_CurDataFile_Mouse, New XmlReaderSettings())
         Else
-            xmlFile_mouse = XmlReader.Create("hotkey_mousemode_default.xml", New XmlReaderSettings())
+			xmlFile_mouse = XmlReader.Create(_Datafile_default_mouse.FullName, New XmlReaderSettings())
         End If
         Dim ds_mouse As New DataSet
         ds_mouse.ReadXml(xmlFile_mouse)
@@ -202,9 +208,9 @@ Public Class Hotkey_changer
     Private Function Loading_joystick(ByVal _default As Integer) As Integer
         Dim xmlFile_joy As XmlReader
         If _default < 1 Then
-            xmlFile_joy = XmlReader.Create("hotkey_joystick.xml", New XmlReaderSettings())
+			xmlFile_joy = XmlReader.Create(_CurDataFile_Joystick, New XmlReaderSettings())
         Else
-            xmlFile_joy = XmlReader.Create("hotkey_joystick_default.xml", New XmlReaderSettings())
+			xmlFile_joy = XmlReader.Create(_Datafile_default_joystick.FullName, New XmlReaderSettings())
         End If
         Dim ds_joy As New DataSet
         ds_joy.ReadXml(xmlFile_joy)
@@ -243,7 +249,7 @@ Public Class Hotkey_changer
                 Dim Max_Row As Integer
                 Max_Row = _list.Rows.Count
                 For i As Integer = 0 To Max_Row - 1 Step +1
-                    If _list.Rows(i).Cells(curColumn).Value = _key Then
+                    If _list.Rows(i).Cells(curColumn).Value Is _key Then
 
                         Conflict_List.Add(_list.Rows(i).Cells(0).Value)
 
@@ -298,21 +304,21 @@ Public Class Hotkey_changer
         If mode = 0 Then
             Select Case MessageBox.Show(Me, "Are you sure?", "Saving", MessageBoxButtons.YesNo)
                 Case DialogResult.No : Return
-                Case DialogResult.Yes : list_key.DataSource.WriteXml(_Datafile_key.FullName)
-                    MsgBox("Saved")           ' 
-            End Select
+				Case DialogResult.Yes : list_key.DataSource.WriteXml(_CurDataFile_Key)
+					MsgBox("Saved")			  ' 
+			End Select
         ElseIf mode = 1 Then
             Select Case MessageBox.Show(Me, "Are you sure?", "Saving", MessageBoxButtons.YesNo)
                 Case DialogResult.No : Return
-                Case DialogResult.Yes : list_mouse.DataSource.WriteXml(_Datafile_mouse.FullName)
-                    MsgBox("Saved")
-            End Select
+				Case DialogResult.Yes : list_mouse.DataSource.WriteXml(_CurDataFile_Mouse)
+					MsgBox("Saved")
+			End Select
         ElseIf mode = 2 Then
             Select Case MessageBox.Show(Me, "Are you sure?", "Saving", MessageBoxButtons.YesNo)
                 Case DialogResult.No : Return
-                Case DialogResult.Yes : list_joystick.DataSource.WriteXml(_Datafile_joystick.FullName)
-                    MsgBox("Saved")
-            End Select
+				Case DialogResult.Yes : list_joystick.DataSource.WriteXml(_CurDataFile_Joystick)
+					MsgBox("Saved")
+			End Select
         End If
 
 
@@ -334,18 +340,22 @@ Public Class Hotkey_changer
 
     Private Sub Keyboard_reload(sender As Object, e As EventArgs) Handles b_reload_k.Click
         If _list Is list_key Then
-
-
             key_text.Visible = False
-            Dim curFile As String = _Datafile_key.FullName
 
-            If File.Exists(curFile) Then
-                Loading(0)
-                mode = 0
-            Else
-                MessageBox.Show("Can't find 'hotkey.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
-                Me.Close()
-            End If
+			If File.Exists(_Datafile_key_User.FullName) Then
+				_CurDataFile_Key = _Datafile_key_User.FullName
+				Loading(0)
+				mode = 0
+			Else
+				If File.Exists(_Datafile_key.FullName) Then
+					_CurDataFile_Key = _Datafile_key.FullName
+					Loading(0)
+					mode = 0
+				Else
+					MessageBox.Show("Can't find 'hotkey.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
+					Me.Close()
+				End If
+			End If
             If list_key.Rows.Count > 1 And _list Is list_key Then
                 change_to.Enabled = True
                 change_tab.Enabled = True
@@ -362,15 +372,20 @@ Public Class Hotkey_changer
         If _list Is list_mouse Then
 
             mouse_text.Visible = False
-            Dim curFile_mouse As String = _Datafile_mouse.FullName
-
-            If File.Exists(curFile_mouse) Then
-                Loading_mouse(0)
-
-            Else
-                MessageBox.Show("Can't find 'hotkey_mousemode.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
-                Me.Close()
-            End If
+			If File.Exists(_Datafile_mouse_User.FullName) Then
+				_CurDataFile_Mouse = _Datafile_mouse_User.FullName
+				Loading_mouse(0)
+				mode = 0
+			Else
+				If File.Exists(_Datafile_mouse.FullName) Then
+					_CurDataFile_Mouse = _Datafile_mouse.FullName
+					Loading_mouse(0)
+					mode = 0
+				Else
+					MessageBox.Show("Can't find 'hotkey.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
+					Me.Close()
+				End If
+			End If
             If list_mouse.Rows.Count > 1 And _list Is list_mouse Then
                 change_to.Enabled = True
                 change_tab.Enabled = True
@@ -387,15 +402,20 @@ Public Class Hotkey_changer
         If _list Is list_joystick Then
 
             joystick_text.Visible = False
-            Dim curFile_joystick As String = _Datafile_joystick.FullName
-
-            If File.Exists(curFile_joystick) Then
-                Loading_joystick(0)
-
-            Else
-                MessageBox.Show("Can't find 'hotkey_joystick.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
-                Me.Close()
-            End If
+			If File.Exists(_Datafile_joystick_User.FullName) Then
+				_CurDataFile_Joystick = _Datafile_joystick_User.FullName
+				Loading_joystick(0)
+				mode = 0
+			Else
+				If File.Exists(_Datafile_joystick.FullName) Then
+					_CurDataFile_Joystick = _Datafile_joystick.FullName
+					Loading_joystick(0)
+					mode = 0
+				Else
+					MessageBox.Show("Can't find 'hotkey.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
+					Me.Close()
+				End If
+			End If
             If list_joystick.Rows.Count > 1 And _list Is list_joystick Then
                 change_tab.Enabled = True
                 change_enter.Enabled = True
@@ -656,35 +676,29 @@ Public Class Hotkey_changer
         Select Case MessageBox.Show(Me, "Are you sure?", "Reset to default", MessageBoxButtons.YesNo)
             Case DialogResult.No : Return
             Case DialogResult.Yes
-                If mode = 0 Then
-                    Dim curFile As String = _Datafile_default_key.FullName
+				If mode = 0 Then
+					If File.Exists(_Datafile_default_key.FullName) Then
+						Loading(1)
+					Else
+						MessageBox.Show("Can't find 'hotkey.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
+						Me.Close()
+					End If
 
-                    If File.Exists(curFile) Then
-                        Loading(1)
-                    Else
-                        MessageBox.Show("Can't find 'hotkey.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
-                        Me.Close()
-                    End If
-
-                ElseIf mode = 1 Then
-                    Dim curFile_mouse As String = _Datafile_default_mouse.FullName
-
-                    If File.Exists(curFile_mouse) Then
-                        Loading_mouse(1)
-                    Else
-                        MessageBox.Show("Can't find 'hotkey_mousemode.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
-                        Me.Close()
-                    End If
-                ElseIf mode = 2 Then
-                    Dim curFile_joystick As String = _Datafile_default_joystick.FullName
-
-                    If File.Exists(curFile_joystick) Then
-                        Loading_joystick(1)
-                    Else
-                        MessageBox.Show("Can't find 'hotkey_mousemode.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
-                        Me.Close()
-                    End If
-                End If
+				ElseIf mode = 1 Then
+					If File.Exists(_Datafile_default_mouse.FullName) Then
+						Loading_mouse(1)
+					Else
+						MessageBox.Show("Can't find 'hotkey_mousemode.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
+						Me.Close()
+					End If
+				ElseIf mode = 2 Then
+					If File.Exists(_Datafile_default_joystick.FullName) Then
+						Loading_joystick(1)
+					Else
+						MessageBox.Show("Can't find 'hotkey_mousemode.xml'" & vbCrLf & "Put me in the Tree of Savior folder!")
+						Me.Close()
+					End If
+				End If
         End Select
     End Sub
 
